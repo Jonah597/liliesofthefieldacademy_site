@@ -1,9 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Quote, ArrowRight, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Quote } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const stories = [
     {
@@ -36,38 +39,66 @@ const stories = [
 ];
 
 export default function Stories() {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const revealElements = gsap.utils.toArray<HTMLElement>(".reveal-text");
+            revealElements.forEach((el: HTMLElement) => {
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 70, scale: 0.98, filter: "blur(15px)" },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        filter: "blur(0px)",
+                        duration: 1.5,
+                        ease: "expo.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+            });
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen">
+        <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO - EMOTIVE & CRISP */}
             <section className="relative min-h-[60svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-32 md:pt-40 border-b border-slate-100">
                 <div className="container relative z-10 mx-auto px-6 max-w-6xl text-center">
-                    <span className="uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
+                    <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
                         Voices of Change
                     </span>
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
+                    <h1 className="reveal-text text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
                         Stories that <br /> inspire hope.
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed text-balance opacity-80">
+                    <p className="reveal-text text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed text-balance opacity-80">
                         Beyond statistics are real human lives. These are the personal journeys
                         of the students and volunteers who make up our academy.
                     </p>
                 </div>
             </section>
 
-            {/* 2. FEATURED STORY - PREMIUM OVERLAY */}
+            {/* 2. FEATURED STORY - BLUE OVERLAY */}
             <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto w-full">
-                <div className="relative rounded-[5rem] overflow-hidden group shadow-2xl aspect-[16/9] min-h-[600px] border-[12px] border-slate-50 p-6">
+                <div className="reveal-text relative rounded-[5rem] overflow-hidden group shadow-2xl aspect-[16/9] min-h-[600px] border-[12px] border-slate-50 p-6">
                     <Image src="/images/pic17.jpeg" alt="Featured Story" fill className="object-cover transition-transform duration-1000 group-hover:scale-105 rounded-[4rem]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent rounded-[4rem]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2563eb]/90 via-[#2563eb]/40 to-transparent rounded-[4rem]" />
 
                     <div className="absolute bottom-0 left-0 p-12 md:p-24 w-full max-w-6xl z-20">
-                        <span className="bg-[#22c55e] text-fwhite text-[12px] font-bold uppercase tracking-[0.2em] py-3 px-6 rounded-full mb-10 inline-block shadow-2xl">
+                        <span className="bg-[#22c55e] text-white text-[12px] font-bold uppercase tracking-[0.2em] py-3 px-6 rounded-full mb-10 inline-block shadow-2xl">
                             Featured Narrative
                         </span>
                         <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-10 leading-[1] tracking-tight text-balance">
                             &quot;They told me girls in my village don&apos;t become doctors. Lilies Academy told me I could.&quot;
                         </h2>
-                        <div className="flex items-center gap-6 text-slate-300">
+                        <div className="flex items-center gap-6 text-white/80">
                             <span className="font-bold text-2xl">Grace, Future Pediatrician</span>
                         </div>
                     </div>
@@ -78,7 +109,7 @@ export default function Stories() {
             <section className="py-24 md:py-48 px-6 bg-white w-full max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 md:gap-32">
                     {stories.map((story, i) => (
-                        <article key={i} className="group flex flex-col items-start cursor-pointer transition-all duration-700 hover:-translate-y-4">
+                        <article key={i} className="reveal-text group flex flex-col items-start cursor-pointer transition-all duration-700 hover:-translate-y-4">
                             <div className="relative aspect-[4/3] w-full rounded-[4.5rem] overflow-hidden mb-16 shadow-xl group-hover:shadow-2xl transition-all duration-700 border-[8px] border-slate-50 p-6 bg-slate-50">
                                 <Image src={story.img} alt={story.title} fill className="object-cover rounded-[3.5rem]" />
                             </div>
@@ -108,17 +139,17 @@ export default function Stories() {
                 </div>
             </section>
 
-            {/* 4. NEWSLETTER - BOLD & FOCUSED */}
-            <section className="py-24 md:py-48 bg-slate-900 text-white text-center rounded-[5rem] mx-4 md:mx-10 mb-24 relative overflow-hidden group">
-                <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_2px_2px,_white_1px,_transparent_0)] [background-size:24px_24px]" />
+            {/* 4. NEWSLETTER - BRAND BLUE */}
+            <section className="py-24 md:py-48 bg-[#2563eb] text-white text-center rounded-[5rem] mx-4 md:mx-10 mb-24 relative overflow-hidden group">
+                <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at:2px_2px,_white_1px,_transparent_0)] [background-size:24px_24px]" />
                 <div className="max-w-4xl mx-auto relative z-10 px-6">
-                    <h2 className="text-6xl md:text-9xl font-heading font-bold mb-12 leading-tight tracking-tight">Inspire your <br /> inbox.</h2>
-                    <p className="text-xl md:text-2xl text-slate-400 mb-20 max-w-2xl mx-auto font-light leading-relaxed">Join our list of supporters to receive monthly stories direct from the field.</p>
-                    <form className="flex flex-col md:flex-row gap-6 max-w-2xl mx-auto" onSubmit={(e) => e.preventDefault()}>
+                    <h2 className="reveal-text text-6xl md:text-9xl font-heading font-bold mb-12 leading-tight tracking-tight">Inspire your <br /> inbox.</h2>
+                    <p className="reveal-text text-xl md:text-2xl text-blue-100 mb-20 max-w-2xl mx-auto font-light leading-relaxed opacity-90">Join our list of supporters to receive monthly stories direct from the field.</p>
+                    <form className="reveal-text flex flex-col md:flex-row gap-6 max-w-2xl mx-auto" onSubmit={(e) => e.preventDefault()}>
                         <input
                             type="email"
                             placeholder="Email address"
-                            className="flex-1 bg-white/10 border border-white/20 rounded-full px-10 py-6 text-white placeholder-slate-500 font-bold text-lg focus:outline-none focus:ring-4 ring-[#22c55e]/30 transition-all backdrop-blur-md"
+                            className="flex-1 bg-white/10 border border-white/20 rounded-full px-10 py-6 text-white placeholder-blue-200 font-bold text-lg focus:outline-none focus:ring-4 ring-[#22c55e]/30 transition-all backdrop-blur-md"
                         />
                         <button className="bg-[#22c55e] text-white font-bold rounded-full px-16 py-6 hover:bg-white hover:text-[#22c55e] transition-all shadow-2xl text-xl active:scale-95">
                             Subscribe

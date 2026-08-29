@@ -1,33 +1,82 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { Users, Heart, GraduationCap, ArrowRight, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Handshake, HeartHandshake, FileText, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const volunteerRoles = [
+    {
+        title: "Education Support",
+        desc: "Assist our teachers in classrooms, provide tutoring sessions, or help develop learning materials for our students.",
+        icon: GraduationCap,
+        color: "bg-blue-50 text-[#2563eb]"
+    },
+    {
+        title: "Community Outreach",
+        desc: "Help us organize community events, health screenings, and family support programs in the regions we serve.",
+        icon: Users,
+        color: "bg-green-50 text-[#22c55e]"
+    },
+    {
+        title: "Administrative Help",
+        desc: "Lend your professional skills in marketing, fundraising, or operations to help our academy run more efficiently.",
+        icon: Heart,
+        color: "bg-red-50 text-red-500"
+    }
+];
+
+const sponsorshipLevels = [
+    {
+        title: "Term Scholar",
+        price: "120",
+        period: "term",
+        features: ["School uniforms & shoes", "Term textbook set", "Daily nutritious dinner", "Local healthcare support"],
+        cta: "Sponsor Term",
+        highlight: false
+    },
+    {
+        title: "Annual Impact",
+        price: "350",
+        period: "year",
+        features: ["Full tuition & fees", "All uniforms & supplies", "Daily after-school dinner", "Music & Arts program", "KPI tracking & reports"],
+        cta: "Most Impactful",
+        highlight: true
+    },
+    {
+        title: "Legacy Partner",
+        price: "1,000",
+        period: "year",
+        features: ["Full Annual support", "Future building fund contrib", "Tertiary education savings", "Direct community impact", "Bi-annual video updates"],
+        cta: "Build a Legacy",
+        highlight: false
+    }
+];
+
 export default function GetInvolved() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [activeTab, setActiveTab] = useState<"volunteer" | "partner">("volunteer");
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray<HTMLElement>(".inv-fade").forEach((element) => {
+            const revealElements = gsap.utils.toArray<HTMLElement>(".reveal-text");
+            revealElements.forEach((el: HTMLElement) => {
                 gsap.fromTo(
-                    element,
-                    { opacity: 0, y: 30 },
+                    el,
+                    { opacity: 0, y: 70, scale: 0.98, filter: "blur(15px)" },
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.8,
-                        ease: "circ.out",
+                        scale: 1,
+                        filter: "blur(0px)",
+                        duration: 1.5,
+                        ease: "expo.out",
                         scrollTrigger: {
-                            trigger: element,
-                            start: "top 85%",
+                            trigger: el,
+                            start: "top 90%",
+                            toggleActions: "play none none none",
                         },
                     }
                 );
@@ -37,168 +86,112 @@ export default function GetInvolved() {
     }, []);
 
     return (
-        <div className="w-full flex-col flex overflow-hidden bg-white" ref={containerRef}>
-
-            {/* Hero */}
-            <section className="relative h-[65svh] w-full flex items-center justify-center overflow-hidden bg-primary overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-blue-900 mix-blend-multiply z-10" />
-                <div className="absolute inset-0 bg-[url('/images/pic3.jpeg')] bg-cover bg-center opacity-40 z-0" />
-
-                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white mt-16">
-                    <span className="text-blue-200 font-bold tracking-widest uppercase text-sm mb-6 block inv-fade">Join The Movement</span>
-                    <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 inv-fade text-balance">
-                        Your Time. Their Future.
+        <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
+            {/* 1. HERO */}
+            <section className="relative min-h-[70svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-32 md:pt-40 border-b border-slate-100">
+                <div className="container relative z-10 mx-auto px-6 max-w-6xl text-center">
+                    <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
+                        Be the Change
+                    </span>
+                    <h1 className="reveal-text text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
+                        Your hands, <br /> their future.
                     </h1>
-                    <p className="text-xl text-blue-50 max-w-2xl mx-auto inv-fade font-medium leading-relaxed">
-                        There are many ways to make an impact. Whether you offer your skills as a volunteer, align your business as a partner, or sponsor a child&apos;s education, you are building a better world.
+                    <p className="reveal-text text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed text-balance opacity-80">
+                        Whether you give your time as a volunteer or your resources as a sponsor,
+                        you are making an eternal investment in a child&apos;s life.
                     </p>
                 </div>
             </section>
 
-            {/* Sponsor a child Callout */}
-            <section className="py-24 px-6 bg-[#FAFAFA] border-b border-gray-100 relative">
-                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div className="inv-fade relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-                        <Image src="/images/pic7.jpeg" alt="Sponsor a Child" fill className="object-cover" />
-                    </div>
-                    <div className="inv-fade">
-                        <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center text-red-500 mb-8">
-                            <HeartHandshake className="w-8 h-8" />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-foreground">Sponsor a Child</h2>
-                        <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                            For less than the cost of a daily cup of coffee, you can provide a child with a full year of education, comprehensive healthcare, and daily nutritious meals. Sponsorship goes beyond money—it creates a lifelong bond of support.
+            {/* 2. VOLUNTEER SECTION */}
+            <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center mb-32">
+                    <div className="reveal-text">
+                        <h2 className="text-5xl md:text-7xl font-heading font-bold mb-10 text-slate-900 leading-tight">Volunteer your expertise.</h2>
+                        <p className="text-xl text-slate-500 leading-relaxed font-light mb-12">
+                            Our academy thrives on the dedication of volunteers from across the globe.
+                            Join our local or international teams to help us deliver excellence.
                         </p>
-                        <Link href="/donate" className="bg-primary text-white rounded-full px-8 py-4 font-bold inline-flex items-center gap-2 hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30">
-                            Sponsor Now <ArrowRight className="w-5 h-5" />
-                        </Link>
+                        <button className="bg-[#2563eb] text-white px-12 py-5 rounded-full text-lg font-bold shadow-2xl transition-all duration-300 hover:bg-[#1d4ed8] active:scale-95 flex items-center gap-3">
+                            Apply to Volunteer <ArrowRight className="w-5 h-5" />
+                        </button>
+                    </div>
+                    <div className="reveal-text relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-slate-50">
+                        <Image src="/images/pic8.jpeg" alt="Volunteer teaching" fill className="object-cover" />
                     </div>
                 </div>
-            </section>
 
-            {/* Forms Section */}
-            <section className="py-32 px-6 bg-white relative">
-                <div className="max-w-7xl mx-auto">
-
-                    <div className="text-center mb-16 inv-fade">
-                        <h2 className="text-4xl font-heading font-bold mb-4">Other Ways to Get Involved</h2>
-                        <p className="text-xl text-gray-500 max-w-2xl mx-auto">Tell us how you&apos;d like to help, and our team will get back to you with the next steps.</p>
-                    </div>
-
-                    {/* Tab switch */}
-                    <div className="flex justify-center mb-12 inv-fade">
-                        <div className="bg-gray-100 p-2 rounded-full inline-flex relative shadow-inner">
-                            <button
-                                onClick={() => setActiveTab("volunteer")}
-                                className={`px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 relative z-10 ${activeTab === "volunteer" ? 'text-primary' : 'text-gray-500 hover:text-gray-900'}`}
-                            >
-                                Become a Volunteer
-                            </button>
-                            <button
-                                onClick={() => setActiveTab("partner")}
-                                className={`px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 relative z-10 ${activeTab === "partner" ? 'text-primary' : 'text-gray-500 hover:text-gray-900'}`}
-                            >
-                                Corporate Partnership
-                            </button>
-
-                            {/* Sliding Background */}
-                            <div
-                                className={`absolute top-2 bottom-2 w-[calc(50%-8px)] bg-white rounded-full shadow-sm transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${activeTab === "partner" ? 'translate-x-[calc(100%+8px)]' : 'translate-x-0'}`}
-                            />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    {volunteerRoles.map((role, i) => (
+                        <div key={i} className="reveal-text p-12 rounded-[3.5rem] bg-slate-50 border border-slate-100 group hover:bg-white hover:shadow-2xl transition-all duration-500">
+                            <div className={`w-20 h-20 rounded-3xl ${role.color} flex items-center justify-center mb-10 group-hover:scale-110 transition-transform`}>
+                                <role.icon className="w-10 h-10" />
+                            </div>
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900">{role.title}</h3>
+                            <p className="text-slate-500 leading-relaxed font-light">{role.desc}</p>
                         </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 3. SPONSORSHIP SECTION */}
+            <section className="py-24 md:py-48 px-6 bg-[#2563eb] text-white rounded-[5.5rem] mx-4 md:mx-10 mb-24 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_2px_2px,_white_1px,_transparent_0)] [background-size:32px_32px]" />
+                <div className="container relative z-10 mx-auto max-w-7xl">
+                    <div className="text-center max-w-4xl mx-auto mb-24 reveal-text">
+                        <h2 className="text-6xl md:text-8xl font-heading font-bold mb-12 leading-tight tracking-tight">Sponsor a bright mind.</h2>
+                        <p className="text-xl md:text-2xl text-blue-100 font-light leading-relaxed opacity-90">
+                            Directly impact a child&apos;s life by covering their essential needs.
+                            Your sponsorship provides more than supplies—it providing hope.
+                        </p>
                     </div>
 
-                    <div className="max-w-3xl mx-auto bg-white rounded-[2rem] border border-gray-100 shadow-xl p-8 md:p-12 inv-fade shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)]">
-
-                        {activeTab === "volunteer" && (
-                            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <Handshake className="w-10 h-10 text-primary" />
-                                    <div>
-                                        <h3 className="text-2xl font-heading font-bold">Volunteer Application</h3>
-                                        <p className="text-gray-500 text-sm">Join our team of dedicated tutors and mentors.</p>
-                                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                        {sponsorshipLevels.map((plan, i) => (
+                            <div key={i} className={`reveal-text p-16 rounded-[4.5rem] border flex flex-col ${plan.highlight ? 'bg-white text-slate-900 border-white shadow-3xl scale-105' : 'bg-white/5 border-white/20 text-white hover:bg-white/10'}`}>
+                                <h3 className={`text-2xl font-bold font-heading mb-4 ${plan.highlight ? 'text-[#2563eb]' : 'text-white'}`}>{plan.title}</h3>
+                                <div className="flex items-baseline gap-2 mb-10">
+                                    <span className="text-5xl font-bold">${plan.price}</span>
+                                    <span className="text-lg opacity-60">/{plan.period}</span>
                                 </div>
+                                <ul className="flex flex-col gap-6 mb-16 flex-1">
+                                    {plan.features.map((feat, j) => (
+                                        <li key={j} className="flex items-start gap-4 text-lg font-light leading-tight">
+                                            <CheckCircle2 className={`w-6 h-6 shrink-0 ${plan.highlight ? 'text-[#22c55e]' : 'text-white/40'}`} />
+                                            {feat}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <button className={`w-full py-6 rounded-full font-bold text-xl transition-all active:scale-95 shadow-xl ${plan.highlight ? 'bg-[#2563eb] text-white hover:bg-[#1d4ed8]' : 'bg-white text-[#2563eb] hover:bg-blue-50'}`}>
+                                    {plan.cta}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
 
-                                <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={(e) => e.preventDefault()}>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-bold text-gray-700">First Name</label>
-                                        <input type="text" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Jane" />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-bold text-gray-700">Last Name</label>
-                                        <input type="text" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Doe" />
-                                    </div>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Email Address</label>
-                                        <input type="email" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="jane@example.com" />
-                                    </div>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Area of Interest</label>
-                                        <select className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground bg-white">
-                                            <option>Academic Tutoring</option>
-                                            <option>Mentorship Programs</option>
-                                            <option>Event Organization</option>
-                                            <option>Administrative Support</option>
-                                        </select>
-                                    </div>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Why do you want to volunteer?</label>
-                                        <textarea rows={4} className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="Tell us briefly about yourself..."></textarea>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <button className="w-full bg-foreground text-white py-4 rounded-xl font-bold hover:bg-primary transition-colors hover:shadow-lg shadow-primary/20">
-                                            Submit Application
-                                        </button>
-                                    </div>
-                                </form>
-                            </motion.div>
-                        )}
-
-                        {activeTab === "partner" && (
-                            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <FileText className="w-10 h-10 text-green-600" />
-                                    <div>
-                                        <h3 className="text-2xl font-heading font-bold">Partnership Inquiry</h3>
-                                        <p className="text-gray-500 text-sm">Align your brand with our mission to educate.</p>
-                                    </div>
-                                </div>
-
-                                <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={(e) => e.preventDefault()}>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Company Name</label>
-                                        <input type="text" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all" placeholder="Acme Corp" />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-bold text-gray-700">Contact Person</label>
-                                        <input type="text" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all" placeholder="John Doe" />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-bold text-gray-700">Position/Title</label>
-                                        <input type="text" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all" placeholder="CSR Manager" />
-                                    </div>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Work Email</label>
-                                        <input type="email" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all" placeholder="john@acme.com" />
-                                    </div>
-                                    <div className="flex flex-col gap-2 md:col-span-2">
-                                        <label className="text-sm font-bold text-gray-700">Partnership Proposal Idea</label>
-                                        <textarea rows={4} className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all resize-none" placeholder="How would you like to collaborate with us?"></textarea>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <button className="w-full bg-green-600 text-white py-4 rounded-xl font-bold hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20">
-                                            Send Inquiry
-                                        </button>
-                                    </div>
-                                </form>
-                            </motion.div>
-                        )}
-
+                    <div className="mt-24 reveal-text text-center text-blue-100 font-light max-w-2xl mx-auto italic">
+                        &quot;I didn&apos;t just get a scholarship; I got a family that believes in me.&quot; — Kofi, Grade 6 Student
                     </div>
                 </div>
             </section>
 
+            {/* 4. FAQ / CTA SHORT */}
+            <section className="py-24 md:py-48 px-6 text-center max-w-4xl mx-auto">
+                <div className="reveal-text">
+                    <h2 className="text-4xl md:text-6xl font-heading font-bold mb-10 text-slate-900">Have questions?</h2>
+                    <p className="text-xl text-slate-500 font-light mb-16">
+                        Our team is available to discuss group volunteer opportunities or custom corporate sponsorship packages.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <button className="bg-slate-900 text-white px-12 py-6 rounded-full font-bold text-lg hover:bg-slate-800 transition-all shadow-xl">
+                            Corporate Inquiry
+                        </button>
+                        <button className="bg-white text-[#2563eb] border-2 border-[#2563eb] px-12 py-6 rounded-full font-bold text-lg hover:bg-blue-50 transition-all">
+                            Vounteer Handbook
+                        </button>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
