@@ -16,15 +16,15 @@ export default function Card({
   const variantStyles = {
     flat: "bg-slate-50 border border-slate-100",
     elevated:
-      "bg-white shadow-xl hover:shadow-2xl border border-slate-100 transition-all duration-500",
-    bordered: "bg-white border-2 border-slate-200",
+      "bg-white shadow-sm hover:shadow-md border border-slate-100 transition-shadow duration-300",
+    bordered: "bg-white border border-slate-200",
     glass:
-      "bg-white/80 backdrop-blur-md border border-white/40 shadow-2xl text-slate-900",
+      "bg-white/80 backdrop-blur-md border border-white/40 shadow-sm text-slate-900",
   };
 
   return (
     <div
-      className={cn("rounded-[3.5rem] p-8 md:p-12", variantStyles[variant], className)}
+      className={cn("rounded-2xl md:rounded-3xl p-6 md:p-10", variantStyles[variant], className)}
       {...props}
     >
       {children}

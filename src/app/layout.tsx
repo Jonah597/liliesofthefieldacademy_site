@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { montserrat, roboto_mono } from "./fonts";
+import { inter, manrope } from "./fonts";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${roboto_mono.variable} ${montserrat.className}`}>
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body className="font-sans text-foreground bg-background antialiased flex flex-col min-h-screen">
         <SmoothScroll>
           <RefreshRedirect />

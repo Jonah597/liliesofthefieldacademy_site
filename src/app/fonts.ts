@@ -1,13 +1,15 @@
-import { Montserrat, Roboto_Mono } from 'next/font/google';
+import { Manrope, Inter } from 'next/font/google';
 
-export const montserrat = Montserrat({
+export const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-montserrat',
+  variable: '--font-manrope',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
-export const roboto_mono = Roboto_Mono({
+export const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-roboto-mono',
+  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
 });

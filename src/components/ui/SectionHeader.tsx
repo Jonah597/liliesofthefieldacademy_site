@@ -27,7 +27,7 @@ export default function SectionHeader({
   return (
     <div
       className={cn(
-        "flex flex-col max-w-4xl mb-16 md:mb-24",
+        "flex flex-col max-w-3xl mb-12 md:mb-16",
         alignmentClass,
         className
       )}
@@ -35,7 +35,7 @@ export default function SectionHeader({
       {badge && (
         <span
           className={cn(
-            "reveal-text uppercase font-bold tracking-[0.2em] text-[12px] mb-6 block py-2 px-5 rounded-full w-fit shadow-sm",
+            "reveal-text uppercase font-semibold tracking-[0.14em] text-xs mb-4 block py-1.5 px-4 rounded-full w-fit shadow-xs",
             dark
               ? "bg-white/10 text-white/90"
               : "bg-blue-50 text-[#2563eb]"
@@ -46,7 +46,7 @@ export default function SectionHeader({
       )}
       <h2
         className={cn(
-          "reveal-text text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-8 leading-[0.98] tracking-tight text-balance",
+          "reveal-text text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-heading font-bold mb-5 leading-[1.08] tracking-tight text-balance",
           dark ? "text-white" : "text-slate-900"
         )}
       >
@@ -55,8 +55,8 @@ export default function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            "reveal-text text-xl md:text-2xl font-light leading-relaxed max-w-2xl text-balance",
-            dark ? "text-blue-100/90" : "text-slate-500"
+            "reveal-text text-base sm:text-lg md:text-[18px] font-normal leading-relaxed max-w-2xl text-balance",
+            dark ? "text-blue-100/90" : "text-slate-600"
           )}
         >
           {subtitle}

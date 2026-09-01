@@ -2,63 +2,31 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { BookOpen, Heart, Users, GraduationCap, Trophy, Globe, ArrowRight } from "lucide-react";
+import { Award, BookOpen, Heart, TrendingUp, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const impactStats = [
-    {
-        value: "111",
-        label: "Students Supported",
-        sub: "Enrolled in our after-school programs for critical coaching.",
-        icon: Users,
-        color: "text-[#2563eb]",
-        bg: "bg-[#2563eb]/10"
-    },
-    {
-        value: "58%",
-        label: "Girls & Young Women",
-        sub: "A primary focus on female empowerment and safe learning spaces.",
-        icon: Heart,
-        color: "text-[#d72638]",
-        bg: "bg-[#d72638]/10"
-    },
-    {
-        value: "100%",
-        label: "Exam Pass Rate",
-        sub: "Three consecutive years of absolute proficiency in year-end exams.",
-        icon: Trophy,
-        color: "text-[#f59e0b]",
-        bg: "bg-[#f59e0b]/10"
-    },
-    {
-        value: "92",
-        label: "Arts Participants",
-        sub: "Students actively engaged in our music and traditional dance tracks.",
-        icon: BookOpen,
-        color: "text-[#22c55e]",
-        bg: "bg-[#22c55e]/10"
-    }
+const metrics = [
+    { value: "111", label: "Active Students", desc: "Children receiving daily after-school education and nutrition in Osu.", icon: BookOpen },
+    { value: "100%", label: "Exam Success", desc: "Pass rate for national primary graduation examinations.", icon: Award },
+    { value: "58%", label: "Female Students", desc: "Prioritizing the education of young girls to break generational poverty.", icon: Heart },
+    { value: "8+", label: "Years of Service", desc: "Continuously operating in Osu, Accra since January 2016.", icon: TrendingUp },
 ];
 
-const achievements = [
+const testimonials = [
     {
-        title: "2016 Foundation",
-        desc: "Started with 24 students in a leased and renovated building in Osu.",
-        icon: Globe
+        name: "Abena, 11",
+        role: "Primary 5 Student",
+        quote: "Before coming to Lilies, I couldn't read English well. Now I help my younger brother with his homework and I dream of becoming a teacher.",
+        image: "/images/pic9.jpeg"
     },
     {
-        title: "National Finals",
-        desc: "Our students reached the finals of Ghana's 'Talented Kids' national contest.",
-        icon: Trophy
-    },
-    {
-        title: "Future School",
-        desc: "Launched the construction of a permanent, state-of-the-art Academy home.",
-        icon: GraduationCap
+        name: "Emmanuel, 13",
+        role: "Lead Drummer & Student",
+        quote: "The dance and music program taught me focus. My grades went from average to the top of my class because of the discipline I learned here.",
+        image: "/images/pic7.jpeg"
     }
 ];
 
@@ -71,17 +39,16 @@ export default function Impact() {
             revealElements.forEach((el: HTMLElement) => {
                 gsap.fromTo(
                     el,
-                    { opacity: 0, y: 70, scale: 0.98, filter: "blur(15px)" },
+                    { opacity: 0, y: 35, filter: "blur(8px)" },
                     {
                         opacity: 1,
                         y: 0,
-                        scale: 1,
                         filter: "blur(0px)",
-                        duration: 1.5,
-                        ease: "expo.out",
+                        duration: 1.1,
+                        ease: "power3.out",
                         scrollTrigger: {
                             trigger: el,
-                            start: "top 90%",
+                            start: "top 92%",
                             toggleActions: "play none none none",
                         },
                     }
@@ -94,80 +61,95 @@ export default function Impact() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[70svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-32 md:pt-40 border-b border-slate-100 mb-20">
-                <div className="container relative z-10 mx-auto px-6 max-w-6xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
-                        Our Impact
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
+                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
+                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+                        Proven Results
                     </span>
-                    <h1 className="reveal-text text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
-                        Measuring change, <br /> one life at a time.
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                        Measured impact. <br /> Real lives transformed.
                     </h1>
-                    <p className="reveal-text text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed text-balance opacity-80">
-                        Our results aren&apos;t just measured in numbers—they are seen in the confidence
-                        of our students and the transformation of the Osu community.
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                        We prioritize programmatic transparency. Every contribution directly creates tangible, sustainable educational outcomes for children in Accra.
                     </p>
                 </div>
             </section>
 
-            {/* 2. STATS GRID */}
-            <section className="py-24 px-6 max-w-7xl mx-auto w-full mb-32">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {impactStats.map((stat, i) => (
-                        <div key={i} className="reveal-text group p-12 rounded-[4rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center">
-                            <div className={`w-20 h-20 rounded-3xl ${stat.bg} ${stat.color} flex items-center justify-center mb-10 group-hover:scale-110 transition-transform`}>
-                                <stat.icon className="w-10 h-10" />
+            {/* 2. KEY METRICS */}
+            <section className="py-20 md:py-28 px-6 max-w-7xl mx-auto w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {metrics.map((m, i) => (
+                        <div
+                            key={i}
+                            className="reveal-text bg-slate-50 p-6 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-sm transition-all duration-300"
+                        >
+                            <div className="w-11 h-11 rounded-xl bg-white text-[#2563eb] flex items-center justify-center mb-6 shadow-2xs border border-slate-100">
+                                <m.icon className="w-5 h-5" strokeWidth={2.2} />
                             </div>
-                            <h3 className={`text-5xl md:text-6xl font-heading font-bold mb-4 tracking-tighter ${stat.color}`}>{stat.value}</h3>
-                            <p className="text-slate-900 font-bold uppercase tracking-widest text-[11px] mb-4">{stat.label}</p>
-                            <p className="text-slate-500 font-light leading-relaxed text-sm">{stat.sub}</p>
+                            <div>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-1.5 tracking-tight text-slate-900">{m.value}</h2>
+                                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb] mb-2">{m.label}</p>
+                                <p className="text-sm text-slate-600 font-normal leading-relaxed">{m.desc}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* 3. DETAILED BREAKDOWN */}
-            <section className="py-24 md:py-48 px-6 bg-[#2563eb] text-white rounded-[5.5rem] mx-4 md:mx-10 mb-24 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_2px_2px,_white_1px,_transparent_0)] [background-size:32px_32px]" />
-                <div className="container relative z-10 mx-auto max-w-7xl">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                        <div className="reveal-text">
-                            <h2 className="text-5xl md:text-7xl font-heading font-bold mb-10 text-white leading-tight">Key Milestones</h2>
-                            <div className="space-y-12">
-                                {achievements.map((item, i) => (
-                                    <div key={i} className="flex gap-8 group">
-                                        <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:text-[#2563eb] transition-all">
-                                            <item.icon className="w-8 h-8" />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-2xl font-bold font-heading mb-2">{item.title}</h4>
-                                            <p className="text-blue-100 text-lg font-light leading-relaxed max-w-lg">{item.desc}</p>
-                                        </div>
+            {/* 3. CASE STUDIES / TESTIMONIALS */}
+            <section className="py-20 md:py-28 bg-slate-50 px-6 w-full border-y border-slate-100">
+                <div className="max-w-7xl mx-auto">
+                    <div className="reveal-text text-center mb-14">
+                        <span className="uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block">
+                            Voices of Hope
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 tracking-tight">Student Perspectives</h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                        {testimonials.map((t, i) => (
+                            <div key={i} className="reveal-text bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 shadow-2xs flex flex-col md:flex-row gap-6 items-center">
+                                <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden shrink-0 shadow-2xs border border-slate-100">
+                                    <Image src={t.image} alt={t.name} fill className="object-cover" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <p className="font-heading font-bold text-base md:text-lg text-slate-900 mb-3 leading-snug">&ldquo;{t.quote}&rdquo;</p>
+                                    <div>
+                                        <p className="font-heading font-bold text-sm text-slate-900">{t.name}</p>
+                                        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb] mt-0.5">{t.role}</p>
                                     </div>
-                                ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className="reveal-text relative aspect-square rounded-[4rem] overflow-hidden border-[12px] border-white/10 shadow-3xl">
-                            <Image src="/images/pic15.jpeg" alt="Academy success" fill className="object-cover" />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* 4. CTA */}
-            <section className="py-40 text-center px-6">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="reveal-text text-5xl md:text-8xl font-heading font-bold mb-12 leading-tight tracking-tight text-slate-900">Be part of the progress.</h2>
-                    <p className="reveal-text text-xl md:text-2xl text-slate-500 font-light mb-16 max-w-2xl mx-auto leading-relaxed">
-                        Every child we support is a testament to the generosity of people like you.
-                        Let&apos;s keep growing this impact together.
-                    </p>
-                    <div className="reveal-text flex flex-col sm:flex-row items-center justify-center gap-6">
-                        <Link href="/donate" className="bg-[#2563eb] text-white px-16 py-6 rounded-full font-bold text-xl hover:bg-[#1d4ed8] transition-all shadow-2xl active:scale-95 flex items-center gap-3">
-                            Support a Child <Heart className="w-6 h-6" />
-                        </Link>
-                        <Link href="/about" className="text-slate-900 font-bold hover:text-[#2563eb] transition-all">
-                            Read More Our Story <ArrowRight className="inline-block ml-2 w-5 h-5" />
-                        </Link>
+            {/* 4. ANNUAL REPORT / TRANSPARENCY CTA */}
+            <section className="py-16 md:py-24 px-6 max-w-4xl mx-auto text-center w-full">
+                <div className="reveal-text bg-[#2563eb] rounded-2xl md:rounded-3xl p-8 md:p-14 text-white relative overflow-hidden">
+                    <div className="relative z-10 flex flex-col items-center">
+                        <Sparkles className="w-8 h-8 text-white mb-4" />
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-4 tracking-tight leading-tight">
+                            Our Commitment to Financial Integrity
+                        </h2>
+                        <p className="text-base md:text-lg text-blue-50/90 font-normal leading-relaxed max-w-xl mx-auto mb-8">
+                            Over 90% of all contributions directly fund student school fees, daily nutrition, teacher stipends, and academic materials.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-3.5">
+                            <a
+                                href="/donate"
+                                className="bg-[#22c55e] text-white px-7 py-3 rounded-full text-[15px] font-semibold hover:bg-[#16a34a] transition-colors shadow-xs active:translate-y-0.5"
+                            >
+                                Back Our Students
+                            </a>
+                            <a
+                                href="/contact"
+                                className="bg-white/10 text-white border border-white/30 px-7 py-3 rounded-full text-[15px] font-semibold hover:bg-white/20 transition-colors active:translate-y-0.5"
+                            >
+                                Request Financial Reports
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

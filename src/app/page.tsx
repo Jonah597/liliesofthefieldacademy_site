@@ -14,41 +14,39 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // reveal-text elements: reveal with blur and scale
+      // reveal-text elements: quiet, cinematic reveal
       const revealElements = gsap.utils.toArray<HTMLElement>(".reveal-text");
       revealElements.forEach((el: HTMLElement) => {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 80, scale: 0.95, filter: "blur(20px)" },
+          { opacity: 0, y: 35, filter: "blur(8px)" },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
             filter: "blur(0px)",
-            duration: 1.8,
-            ease: "expo.out",
+            duration: 1.1,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 90%",
+              start: "top 92%",
               toggleActions: "play none none none",
             },
           }
         );
       });
 
-      // Special hero reveal: more dramatic entry
+      // Hero reveal
       gsap.fromTo(
         ".hero-reveal",
-        { opacity: 0, y: 100, scale: 0.9, filter: "blur(30px)" },
+        { opacity: 0, y: 40, filter: "blur(12px)" },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
           filter: "blur(0px)",
-          duration: 2,
-          stagger: 0.3,
-          ease: "expo.out",
-          delay: 0.6,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.2,
         }
       );
     }, containerRef);
@@ -58,99 +56,98 @@ export default function Home() {
 
   return (
     <div className="w-full flex-col flex overflow-hidden bg-white" ref={containerRef}>
-      {/* Hero Section - Light Blue Background */}
-      <section className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-[#2563eb] pt-32 md:pt-40">
+      {/* Hero Section */}
+      <section className="relative min-h-[90svh] w-full flex items-center justify-center overflow-hidden bg-[#2563eb] pt-28 md:pt-36 pb-20">
         <div className="absolute inset-0 z-0 select-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2563eb]/80 via-[#2563eb]/50 to-[#2563eb]/90 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2563eb]/85 via-[#2563eb]/60 to-[#2563eb]/95 z-10" />
           <Image
             src="/images/edited1.png"
-            alt="Children studying"
+            alt="Children studying at Lilies of the Field Academy"
             fill
-            className="object-cover opacity-60 md:opacity-75 grayscale-[10%] scale-105"
+            className="object-cover opacity-45 md:opacity-55"
             priority
           />
         </div>
 
-        <div className="container relative z-20 mx-auto px-6 max-w-7xl text-center text-white pb-20">
-          <h1 className="hero-reveal text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 leading-[0.9] tracking-tight text-white text-balance">
-            Championing Education, <br /> Arts & Leadership.
+        <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+          <h1 className="hero-reveal text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-heading font-bold mb-6 leading-[1.08] tracking-tight text-white text-balance">
+            Championing Education, <br /> Arts &amp; Leadership.
           </h1>
-          <p className="hero-reveal text-lg md:text-2xl text-blue-50 mb-16 text-balance max-w-2xl mx-auto leading-relaxed font-light opacity-90">
-            Lilies of The Field Academy is committed to transforming the lives of young girls, boys and at-risk families through education, performing arts, and leadership initiatives.
+          <p className="hero-reveal text-base sm:text-lg md:text-[19px] text-blue-50/90 mb-10 text-balance max-w-2xl mx-auto leading-relaxed font-normal">
+            Lilies of the Field Academy transforms the lives of vulnerable children and at-risk families in Osu, Ghana through structured academic tutoring, performing arts, and mentorship.
           </p>
-          <div className="hero-reveal flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="hero-reveal flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
-              href="/give"
-              className="bg-[#22c55e] hover:bg-white hover:text-[#22c55e] text-white px-12 py-5 rounded-full text-lg font-bold shadow-2xl transition-all duration-300 active:scale-95 whitespace-nowrap animate-pulse-glow"
+              href="/donate"
+              className="bg-[#22c55e] text-white px-7 py-3 rounded-full text-[15px] font-semibold shadow-sm hover:bg-[#16a34a] hover:shadow transition-all duration-200 active:translate-y-0.5 whitespace-nowrap"
             >
-              Support Our Mission ❤️
+              Support Our Mission
             </Link>
             <Link
               href="/about"
-              className="px-12 py-5 rounded-full text-lg font-bold text-white border-2 border-white/20 hover:bg-white/10 transition-all duration-300 active:scale-95 flex items-center gap-2 group"
+              className="px-7 py-3 rounded-full text-[15px] font-semibold text-white border border-white/35 hover:bg-white/10 transition-colors duration-200 active:translate-y-0.5 flex items-center gap-2"
             >
-              Read Our Story <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Read Our Story <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Progress Section */}
-      <section className="py-24 md:py-48 bg-white px-6 w-full max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+      <section className="py-20 md:py-28 bg-white px-6 w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="flex flex-col items-start text-left">
-            <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[12px] mb-6 block transform hover:-translate-y-1 transition-transform">
+            <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block">
               Established in Osu, Accra
             </span>
-            <h2 className="reveal-text text-5xl md:text-7xl font-heading font-bold mb-10 text-slate-900 leading-[1.05] tracking-tight">
+            <h2 className="reveal-text text-3xl sm:text-4xl md:text-[2.75rem] font-heading font-bold mb-5 text-slate-900 leading-[1.12] tracking-tight">
               A haven for marginalized youth since 2016.
             </h2>
-            <p className="reveal-text text-xl text-slate-500 leading-relaxed font-light max-w-xl mb-12">
+            <p className="reveal-text text-base md:text-lg text-slate-600 leading-relaxed font-normal max-w-xl mb-8">
               As a vital after-school haven, the academy tackles critical educational and healthcare needs, while uplifting vulnerable populations and championing sustainable youth development.
             </p>
-            <div className="grid grid-cols-2 gap-8 w-full reveal-text">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 w-full reveal-text">
               {[
                 { label: "Students Supported", val: "111" },
                 { label: "Girls & Young Women", val: "58%" },
               ].map((item, i) => (
-                <div key={i} className="bg-slate-50 p-8 rounded-3xl border border-slate-100 flex flex-col gap-2">
-                  <span className="text-slate-400 font-bold uppercase tracking-widest text-[11px]">{item.label}</span>
-                  <span className="text-4xl font-heading font-bold text-[#2563eb]">{item.val}</span>
+                <div key={i} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col gap-1">
+                  <span className="text-slate-500 font-semibold uppercase tracking-[0.14em] text-xs">{item.label}</span>
+                  <span className="text-3xl sm:text-4xl font-heading font-bold text-[#2563eb]">{item.val}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="reveal-text relative aspect-[1/1] w-full rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-slate-50">
+          <div className="reveal-text relative aspect-square w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-sm border border-slate-100">
             <Image
               src="/images/pic9.jpeg"
-              alt="Academy students"
+              alt="Students in classroom"
               fill
-              className="object-cover transition-transform duration-1000 hover:scale-105"
+              className="object-cover"
             />
           </div>
         </div>
       </section>
 
-      {/* Impact Stats - Light Blue Background */}
-      <section className="py-24 bg-[#2563eb] text-white px-6 rounded-[5rem] mx-4 md:mx-10 mb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_2px_2px,_white_1px,_transparent_0)] [background-size:32px_32px]" />
+      {/* Impact Stats */}
+      <section className="py-16 md:py-20 bg-[#2563eb] text-white px-6 rounded-2xl md:rounded-3xl mx-4 md:mx-8 mb-16 relative overflow-hidden">
         <div className="container relative z-10 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-stretch">
             {[
-              { value: "100%", label: "Exam Pass Rate", icon: BookOpen, sub: "Proficiency in Year end Exams" },
-              { value: "92", label: "Arts Participants", icon: Users, sub: "Music education program participation" },
-              { value: "2016", label: "Year Founded", icon: Heart, sub: "Supporting the children of Osu" },
+              { value: "100%", label: "Exam Pass Rate", icon: BookOpen, sub: "Proficiency in Year-end National Examinations" },
+              { value: "92", label: "Arts Participants", icon: Users, sub: "Enrolled in traditional music and dance education" },
+              { value: "2016", label: "Year Founded", icon: Heart, sub: "Serving youth and families across Osu communities" },
             ].map((stat, i) => (
               <div
                 key={i}
-                className="reveal-text flex flex-col items-center p-12 rounded-[3.5rem] bg-white/5 border border-white/10 transition-all duration-500 hover:bg-white/10 group"
+                className="reveal-text flex flex-col items-center p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 transition-colors duration-200"
               >
-                <div className="w-16 h-16 rounded-2xl bg-white text-[#2563eb] flex items-center justify-center mb-10 shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                  <stat.icon className="w-8 h-8" strokeWidth={2} />
+                <div className="w-12 h-12 rounded-xl bg-white text-[#2563eb] flex items-center justify-center mb-5 shadow-xs">
+                  <stat.icon className="w-6 h-6" strokeWidth={2.2} />
                 </div>
-                <h3 className="text-5xl md:text-7xl font-heading font-bold mb-4 tracking-tight text-white">{stat.value}</h3>
-                <p className="text-white font-bold text-base uppercase tracking-widest mb-3 opacity-80">{stat.label}</p>
-                <p className="text-blue-100 text-sm font-light leading-relaxed max-w-[200px]">{stat.sub}</p>
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-2 tracking-tight text-white">{stat.value}</h3>
+                <p className="text-white font-semibold text-xs uppercase tracking-[0.14em] mb-1.5 opacity-90">{stat.label}</p>
+                <p className="text-blue-100/80 text-sm font-normal leading-relaxed max-w-[220px]">{stat.sub}</p>
               </div>
             ))}
           </div>
@@ -158,25 +155,24 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-40 bg-white text-center px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="reveal-text text-6xl md:text-8xl font-heading font-bold mb-12 leading-[1.05] tracking-tight text-slate-900">
-            Transformation <br /> starts with you.
+      <section className="py-20 md:py-28 bg-white text-center px-6">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="reveal-text text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-5 leading-[1.1] tracking-tight text-slate-900">
+            Transformation <br /> starts with community.
           </h2>
-          <p className="reveal-text text-xl md:text-2xl text-slate-500 font-light mb-20 max-w-2xl mx-auto leading-relaxed">
-            Your single act of generosity can alter the trajectory of a child&apos;s entire life. Join us in building a
-            future of hope today.
+          <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 font-normal mb-8 max-w-xl mx-auto leading-relaxed">
+            Your support provides tuition assistance, daily meals, textbooks, and leadership opportunities for children in Accra.
           </p>
-          <div className="reveal-text flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="reveal-text flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
               href="/donate"
-              className="bg-[#2563eb] text-white px-20 py-7 rounded-full text-2xl font-bold hover:bg-[#1d4ed8] transition-all duration-500 shadow-2xl active:scale-95 flex items-center gap-3 animate-pulse-glow"
+              className="bg-[#2563eb] text-white px-7 py-3.5 rounded-full text-base font-semibold hover:bg-[#1d4ed8] transition-colors duration-200 shadow-xs hover:shadow-sm active:translate-y-0.5"
             >
-              Donate Now ❤️
+              Donate Now
             </Link>
             <Link
               href="/get-involved"
-              className="bg-slate-50 text-slate-900 px-16 py-7 rounded-full text-xl font-bold hover:bg-white hover:text-[#2563eb] transition-all shadow-xl active:scale-95"
+              className="bg-slate-50 text-slate-800 border border-slate-200/90 px-7 py-3.5 rounded-full text-base font-semibold hover:bg-slate-100 transition-colors duration-200 shadow-2xs active:translate-y-0.5"
             >
               Explore Volunteerism
             </Link>

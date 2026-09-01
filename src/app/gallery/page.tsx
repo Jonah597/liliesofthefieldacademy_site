@@ -2,52 +2,30 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn } from "lucide-react";
+import { Heart } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const categories = ["All", "Students", "Community", "Classroom", "Volunteers", "Graduations"];
-
 const galleryImages = [
-    { src: "/images/edited1.png", category: "Classroom" },
-    { src: "/images/edited2.png", category: "Students" },
-    { src: "/images/edited3.png", category: "Students" },
-    { src: "/images/edited4.jpeg", category: "Community" },
-    { src: "/images/edited5.png", category: "Community" },
-    { src: "/images/edited6.png", category: "Graduations" },
-    { src: "/images/edited7.png", category: "Volunteers" },
-    { src: "/images/edited8.png", category: "Students" },
-    { src: "/images/edited9.png", category: "Graduations" },
-    { src: "/images/lilies_img1.jpg", category: "Classroom" },
-    { src: "/images/lilies_img2.jpg", category: "Classroom" },
-    { src: "/images/pic1.jpeg", category: "Students" },
-    { src: "/images/pic2.jpeg", category: "Students" },
-    { src: "/images/pic3.jpeg", category: "Volunteers" },
-    { src: "/images/pic4.jpeg", category: "Community" },
-    { src: "/images/pic5.jpeg", category: "Classroom" },
-    { src: "/images/pic6.jpeg", category: "Community" },
-    { src: "/images/pic7.jpeg", category: "Students" },
-    { src: "/images/pic8.jpeg", category: "Volunteers" },
-    { src: "/images/pic9.jpeg", category: "Classroom" },
-    { src: "/images/pic10.jpeg", category: "Community" },
-    { src: "/images/pic11.jpeg", category: "Students" },
-    { src: "/images/pic12.jpeg", category: "Students" },
-    { src: "/images/pic13.jpeg", category: "Community" },
-    { src: "/images/pic14.jpeg", category: "Graduations" },
-    { src: "/images/pic15.jpeg", category: "Classroom" },
-    { src: "/images/pic16.jpeg", category: "Students" },
-    { src: "/images/pic17.jpeg", category: "Volunteers" },
-    { src: "/images/pic18.jpeg", category: "Community" },
-    { src: "/images/pic19.jpeg", category: "Classroom" },
+    { src: "/images/pic9.jpeg", title: "Daily Literacy & Reading", category: "Academics" },
+    { src: "/images/pic7.jpeg", title: "Cultural Drumming Rehearsal", category: "Arts" },
+    { src: "/images/pic8.jpeg", title: "Mentorship Circle in Osu", category: "Community" },
+    { src: "/images/pic10.jpeg", title: "Founder Joseph with Students", category: "Community" },
+    { src: "/images/edited1.png", title: "Classroom Milestones", category: "Milestones" },
+    { src: "/images/edited4.jpeg", title: "Youth Leadership Development", category: "Leadership" },
 ];
 
+const categories = ["All", "Academics", "Arts", "Community", "Leadership", "Milestones"];
+
 export default function Gallery() {
-    const [activeCategory, setActiveCategory] = useState("All");
-    const [lightboxImage, setLightboxImage] = useState<string | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const [activeTab, setActiveTab] = useState("All");
+
+    const filteredImages = activeTab === "All"
+        ? galleryImages
+        : galleryImages.filter(img => img.category === activeTab);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -55,17 +33,16 @@ export default function Gallery() {
             revealElements.forEach((el: HTMLElement) => {
                 gsap.fromTo(
                     el,
-                    { opacity: 0, y: 70, scale: 0.98, filter: "blur(15px)" },
+                    { opacity: 0, y: 35, filter: "blur(8px)" },
                     {
                         opacity: 1,
                         y: 0,
-                        scale: 1,
                         filter: "blur(0px)",
-                        duration: 1.5,
-                        ease: "expo.out",
+                        duration: 1.1,
+                        ease: "power3.out",
                         scrollTrigger: {
                             trigger: el,
-                            start: "top 90%",
+                            start: "top 92%",
                             toggleActions: "play none none none",
                         },
                     }
@@ -75,113 +52,82 @@ export default function Gallery() {
         return () => ctx.revert();
     }, []);
 
-    const filteredImages = activeCategory === "All"
-        ? galleryImages
-        : galleryImages.filter(img => img.category === activeCategory);
-
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
-            {/* 1. HERO - EMOTIVE & CRISP */}
-            <section className="relative min-h-[60svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-32 md:pt-40 border-b border-slate-100 mb-20">
-                <div className="container relative z-10 mx-auto px-6 max-w-6xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
-                        Visual Impact
+            {/* 1. HERO */}
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
+                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
+                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+                        Visual Archive
                     </span>
-                    <h1 className="reveal-text text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
-                        Moments of <br /> transformation.
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                        Moments of learning, <br /> heritage &amp; community.
                     </h1>
-
-                    <div className="reveal-text flex flex-wrap items-center justify-center gap-4 mt-20 mb-10">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`px-10 py-4 rounded-full text-base font-bold transition-all duration-300 border-2 ${activeCategory === cat ? 'bg-[#2563eb] border-[#2563eb] text-white shadow-2xl scale-105' : 'bg-white border-slate-100 text-slate-500 hover:border-[#2563eb]/20 hover:text-[#2563eb]'}`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                        A photographic record of daily academic routines, cultural performances, and transformative milestones at the academy.
+                    </p>
                 </div>
             </section>
 
-            {/* 2. MASONRY GRID - CLEAN IMAGE CARDS */}
-            <section className="px-6 mb-40 w-full max-w-[1600px] mx-auto">
-                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-10 space-y-10">
-                    <AnimatePresence mode="popLayout">
-                        {filteredImages.map((image) => (
-                            <motion.div
-                                layout
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                key={image.src}
-                                className="relative break-inside-avoid group cursor-pointer rounded-[3.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border-8 border-slate-50"
-                                onClick={() => setLightboxImage(image.src)}
-                            >
-                                <Image
-                                    src={image.src}
-                                    alt={image.category}
-                                    width={600}
-                                    height={800}
-                                    className="w-full h-auto object-cover transition-all duration-700 rounded-[2.5rem]"
-                                />
-
-                                <div className="absolute inset-0 bg-[#2563eb]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                    <div className="bg-white p-5 rounded-full shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-500">
-                                        <ZoomIn className="text-[#2563eb] w-10 h-10" />
-                                    </div>
-                                </div>
-
-                                <div className="absolute bottom-10 left-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-10">
-                                    <span className="bg-white/90 backdrop-blur-md text-slate-900 text-[11px] py-2 px-5 rounded-full font-bold uppercase tracking-[0.15em] shadow-2xl">
-                                        {image.category}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </div>
-            </section>
-
-            {/* Lightbox Modal - Blue Overlay */}
-            <AnimatePresence>
-                {lightboxImage && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[200] bg-[#2563eb]/95 flex items-center justify-center p-8 md:p-16 backdrop-blur-2xl"
-                        onClick={() => setLightboxImage(null)}
-                    >
+            {/* 2. FILTER & GALLERY GRID */}
+            <section className="py-20 md:py-28 px-6 max-w-7xl mx-auto w-full">
+                {/* Filter Buttons */}
+                <div className="reveal-text flex flex-wrap items-center justify-center gap-2 mb-14">
+                    {categories.map((cat) => (
                         <button
-                            className="absolute top-10 right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-6 transition-all shadow-2xl"
-                            onClick={() => setLightboxImage(null)}
+                            key={cat}
+                            onClick={() => setActiveTab(cat)}
+                            className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.14em] transition-colors duration-200 cursor-pointer ${
+                                activeTab === cat
+                                    ? "bg-[#2563eb] text-white shadow-2xs"
+                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                            }`}
                         >
-                            <X className="w-10 h-10 text-white" />
+                            {cat}
                         </button>
+                    ))}
+                </div>
 
-                        <motion.div
-                            initial={{ scale: 0.9, y: 40 }}
-                            animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.9, y: 40 }}
-                            className="relative max-w-7xl w-full max-h-[90vh] rounded-[5rem] overflow-hidden shadow-2xl bg-white p-8 md:p-16"
-                            onClick={(e) => e.stopPropagation()}
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {filteredImages.map((img, i) => (
+                        <div
+                            key={i}
+                            className="reveal-text relative aspect-square rounded-2xl overflow-hidden shadow-2xs border border-slate-100 group bg-slate-100"
                         >
-                            <div className="relative w-full h-[70vh]">
-                                <Image
-                                    src={lightboxImage}
-                                    alt="Lightbox Preview"
-                                    fill
-                                    sizes="100vw"
-                                    className="object-contain rounded-[3.5rem]"
-                                />
+                            <Image
+                                src={img.src}
+                                alt={img.title}
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-250 flex flex-col justify-end p-6">
+                                <span className="text-blue-300 text-xs font-semibold uppercase tracking-[0.14em] mb-1">{img.category}</span>
+                                <h3 className="text-lg font-heading font-bold text-white leading-snug">{img.title}</h3>
                             </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 3. CTA */}
+            <section className="py-16 md:py-24 bg-[#2563eb] text-white text-center px-6">
+                <div className="max-w-3xl mx-auto">
+                    <Heart className="w-8 h-8 text-white/80 mx-auto mb-4" />
+                    <h2 className="reveal-text text-3xl sm:text-4xl font-heading font-bold mb-4 text-white leading-tight tracking-tight">
+                        Support Our Daily Operations
+                    </h2>
+                    <p className="reveal-text text-base sm:text-lg text-blue-50/90 font-normal mb-8 max-w-xl mx-auto leading-relaxed">
+                        Every gift provides school uniforms, daily nutritious meals, and essential books for students in Osu.
+                    </p>
+                    <a
+                        href="/donate"
+                        className="reveal-text inline-block bg-[#22c55e] text-white px-7 py-3.5 rounded-full text-base font-semibold hover:bg-[#16a34a] transition-colors shadow-xs active:translate-y-0.5"
+                    >
+                        Make a Donation
+                    </a>
+                </div>
+            </section>
         </div>
     );
 }

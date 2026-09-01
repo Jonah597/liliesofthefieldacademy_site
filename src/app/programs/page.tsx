@@ -2,145 +2,174 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { BookOpen, Music, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const programs = [
-  {
-    title: "Education & Literacy",
-    shortStory:
-      "Our after-school haven provides critical coaching in English, Math, and History. We ensure students are not just attending class, but truly mastering the curriculum to break the cycle of poverty.",
-    impact: "100% proficiency rate in year-end exams for three consecutive years.",
-    img: "/images/edited3.png",
-    accent: "text-[#2563eb]",
-    bg: "bg-[#2563eb]",
-  },
-  {
-    title: "Performing Arts & Music",
-    shortStory:
-      "From traditional African drumming to modern dance, our arts program is a beacon of joy and self-expression. It builds confidence and discipline that translates directly into academic success.",
-    impact: "92 students participating in our music and dance education programs.",
-    img: "/images/pic15.jpeg",
-    accent: "text-[#22c55e]",
-    bg: "bg-[#22c55e]",
-  },
-  {
-    title: "Leadership & Mentorship",
-    shortStory:
-      "We cultivate the next generation of Ghanaian leaders. Through structured leadership initiatives and mentorship, our students grow into resilient, self-reliant community champions.",
-    impact: "58% of our focus is on empowering young girls and women to lead.",
-    img: "/images/edited8.png",
-    accent: "text-[#d72638]",
-    bg: "bg-[#d72638]",
-  }
+    {
+        icon: BookOpen,
+        title: "Academic Foundation",
+        desc: "Core literacy, numeracy, and STEM education designed to bridge learning gaps for primary-age children. Our tailored curriculum ensures every child reads with confidence.",
+        features: ["After-school homework assistance", "One-on-one literacy tutoring", "Foundational math and science", "English language proficiency"],
+        image: "/images/pic9.jpeg",
+        stats: "111 Students Enrolled"
+    },
+    {
+        icon: Music,
+        title: "Cultural Dance & Music",
+        desc: "Traditional Ghanaian dance, drumming, and performing arts. Arts education builds profound self-esteem, discipline, and cultural identity in young minds.",
+        features: ["Traditional drumming workshops", "Choreography & performance", "Vocal training & rhythm", "International cultural exchange"],
+        image: "/images/pic7.jpeg",
+        stats: "Weekly Rehearsals"
+    },
+    {
+        icon: Users,
+        title: "Leadership & Mentorship",
+        desc: "Empowering young girls and boys with life skills, public speaking, health awareness, and community responsibility to nurture the next generation of African leaders.",
+        features: ["Girls' empowerment circles", "Community service projects", "Public speaking practice", "Health & hygiene education"],
+        image: "/images/pic8.jpeg",
+        stats: "58% Female Representation"
+    },
 ];
 
 export default function Programs() {
-  const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const revealElements = gsap.utils.toArray<HTMLElement>(".reveal-text");
-      revealElements.forEach((el: HTMLElement) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 70, scale: 0.98, filter: "blur(15px)" },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 1.5,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const revealElements = gsap.utils.toArray<HTMLElement>(".reveal-text");
+            revealElements.forEach((el: HTMLElement) => {
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 35, filter: "blur(8px)" },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        duration: 1.1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 92%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+            });
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
 
-  return (
-    <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
-      <section className="relative min-h-[70svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-32 md:pt-40 border-b border-slate-100">
-        <div className="container relative z-10 mx-auto px-6 max-w-6xl text-center">
-          <span className="reveal-text uppercase text-[#2563eb] font-bold tracking-[0.2em] text-[13px] mb-8 block bg-white/10 p-2 rounded-full w-fit mx-auto shadow-sm">
-            Our Initiatives
-          </span>
-          <h1 className="reveal-text text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-10 text-slate-900 leading-[0.95] tracking-tight text-balance">
-            Holistic support <br /> for every child.
-          </h1>
-          <p className="reveal-text text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed text-balance opacity-80">
-            Addressing the physical, academic, and emotional needs of our students to ensure a complete path to
-            success.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-24 md:py-48 px-6 bg-white w-full max-w-7xl mx-auto">
-        <div className="flex flex-col gap-32 md:gap-64">
-          {programs.map((prog, index) => (
-            <div
-              key={index}
-              className={`flex flex-col lg:flex-row items-center gap-16 md:gap-32 ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}
-            >
-              <div className="w-full lg:w-1/2 reveal-text">
-                <div className="relative aspect-[4/5] rounded-[4.5rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] border-[12px] border-slate-50 p-6">
-                  <Image src={prog.img} alt={prog.title} fill className="object-cover rounded-[3.5rem]" />
-                  <div className="absolute inset-x-8 bottom-8 z-10">
-                    <div className="bg-white/80 backdrop-blur-md rounded-4xl p-8 shadow-2xl border border-white/40">
-                      <h4 className="font-heading font-bold text-slate-900 text-xl mb-2">Impact Highlight</h4>
-                      <p className={`text-2xl font-bold tracking-tight ${prog.accent}`}>{prog.impact}</p>
-                    </div>
-                  </div>
+    return (
+        <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
+            {/* 1. HERO */}
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
+                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
+                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+                        Holistic Education
+                    </span>
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                        Igniting potential <br /> across disciplines.
+                    </h1>
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                        We blend rigorous academic support with traditional arts and essential life skills to cultivate well-rounded, confident learners.
+                    </p>
                 </div>
-              </div>
+            </section>
 
-              <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
-                <span className={`reveal-text font-bold tracking-[0.2em] uppercase text-[12px] mb-8 block ${prog.accent}`}>
-                  Initiative 0{index + 1}
-                </span>
-                <h2 className="reveal-text text-4xl md:text-7xl font-heading font-bold mb-12 text-slate-900 leading-[1] tracking-tight">
-                  {prog.title}
-                </h2>
-                <p className="reveal-text text-xl md:text-2xl text-slate-500 leading-relaxed font-light mb-16 italic border-l-4 border-slate-100 pl-10 opacity-90">
-                  &ldquo;{prog.shortStory}&rdquo;
-                </p>
-                <Link
-                  href="/donate"
-                  className={`reveal-text inline-flex items-center gap-4 text-white font-bold text-xl px-12 py-5 rounded-full shadow-2xl transition-all duration-300 active:scale-95 group ${prog.bg}`}
-                >
-                  Sponsor Initiative <ArrowRight className="w-7 h-7 group-hover:translate-x-3 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            {/* 2. PROGRAM PILLARS */}
+            <section className="py-20 md:py-28 px-6 max-w-7xl mx-auto w-full">
+                <div className="flex flex-col gap-20 md:gap-28">
+                    {programs.map((p, i) => {
+                        const isEven = i % 2 === 0;
+                        return (
+                            <div
+                                key={i}
+                                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${isEven ? "" : "lg:grid-flow-dense"}`}
+                            >
+                                <div className={`reveal-text ${isEven ? "" : "lg:col-start-2"}`}>
+                                    <div className="flex items-center gap-3 mb-5">
+                                        <div className="w-11 h-11 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center border border-blue-100 shadow-2xs">
+                                            <p.icon className="w-5 h-5" strokeWidth={2.2} />
+                                        </div>
+                                        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">
+                                            Core Pillar 0{i + 1}
+                                        </span>
+                                    </div>
+                                    <h2 className="text-2xl sm:text-3xl md:text-[2.25rem] font-heading font-bold mb-4 text-slate-900 leading-[1.15] tracking-tight">
+                                        {p.title}
+                                    </h2>
+                                    <p className="text-base md:text-lg text-slate-600 leading-relaxed font-normal mb-6">
+                                        {p.desc}
+                                    </p>
+                                    <div className="space-y-3 mb-8">
+                                        {p.features.map((feat, idx) => (
+                                            <div key={idx} className="flex items-center gap-3 text-sm md:text-base text-slate-700 font-medium">
+                                                <CheckCircle2 className="w-4 h-4 text-[#22c55e] shrink-0" strokeWidth={2.2} />
+                                                <span>{feat}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="inline-block bg-slate-50 border border-slate-200/80 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">
+                                        {p.stats}
+                                    </div>
+                                </div>
+                                <div className={`reveal-text relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-sm border border-slate-100 ${isEven ? "" : "lg:col-start-1"}`}>
+                                    <Image src={p.image} alt={p.title} fill className="object-cover" />
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </section>
 
-      {/* CTA section shifted to brand blue */}
-      <section className="py-24 md:py-48 bg-[#2563eb] text-white text-center rounded-[5rem] mx-4 md:mx-10 mb-24 relative overflow-hidden group">
-        <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at:2px_2px,_white_1px,_transparent_0)] [background-size:24px_24px]" />
-        <div className="max-w-4xl mx-auto relative z-10 px-6">
-          <h2 className="reveal-text text-5xl md:text-8xl font-heading font-bold mb-12 leading-[1.1] tracking-tight text-white">
-            Be the reason a <br /> student thrives.
-          </h2>
-          <Link
-            href="/donate"
-            className="reveal-text inline-block bg-[#22c55e] border-2 border-[#22c55e] text-white px-20 py-7 rounded-full text-2xl font-bold hover:bg-white hover:text-[#22c55e] transition-all duration-500 shadow-2xl active:scale-95"
-          >
-            Start Your Support {"\u2764\uFE0F"}
-          </Link>
+            {/* 3. SCHEDULE */}
+            <section className="py-16 md:py-24 bg-slate-50 px-6 w-full border-t border-slate-100">
+                <div className="max-w-5xl mx-auto">
+                    <div className="reveal-text text-center mb-14">
+                        <span className="uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block">
+                            Daily Flow
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 tracking-tight">A Week at the Academy</h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[
+                            { day: "Monday – Thursday", time: "3:30 PM – 5:30 PM", desc: "Academic literacy, mathematics support, reading circles, and structured homework completion." },
+                            { day: "Friday Afternoons", time: "3:00 PM – 6:00 PM", desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development." },
+                            { day: "Saturday Workshops", time: "9:00 AM – 1:00 PM", desc: "Leadership seminars, health & hygiene education, sports, and guest mentorship series." },
+                        ].map((sched, i) => (
+                            <div key={i} className="reveal-text bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-2xs flex flex-col gap-2.5">
+                                <span className="text-[#2563eb] font-semibold text-xs uppercase tracking-[0.14em]">{sched.time}</span>
+                                <h3 className="text-lg font-heading font-bold text-slate-900">{sched.day}</h3>
+                                <p className="text-sm text-slate-600 font-normal leading-relaxed">{sched.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. CALL TO ACTION */}
+            <section className="py-16 md:py-24 bg-[#2563eb] text-white text-center px-6">
+                <div className="max-w-3xl mx-auto">
+                    <Sparkles className="w-8 h-8 text-white/80 mx-auto mb-4" />
+                    <h2 className="reveal-text text-3xl sm:text-4xl font-heading font-bold mb-4 text-white leading-tight tracking-tight">
+                        Support Our Curriculum
+                    </h2>
+                    <p className="reveal-text text-base sm:text-lg text-blue-50/90 font-normal mb-8 max-w-xl mx-auto leading-relaxed">
+                        Classroom books, learning materials, traditional instruments, and dedicated teachers all rely on donor partnerships.
+                    </p>
+                    <a
+                        href="/donate"
+                        className="reveal-text inline-block bg-[#22c55e] text-white px-7 py-3.5 rounded-full text-base font-semibold hover:bg-[#16a34a] transition-colors shadow-xs active:translate-y-0.5"
+                    >
+                        Sponsor A Program
+                    </a>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 }

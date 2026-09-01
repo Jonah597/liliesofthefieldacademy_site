@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-// Placeholder data - replace with your actual board members and images
 const members = [
     { name: "Dr. Sarah Johnson", role: "Chairperson", image: "/images/edited4.jpeg" },
     { name: "Michael Chen", role: "Vice Chair", image: "/images/edited4.jpeg" },
@@ -18,63 +17,57 @@ export default function BoardMembers() {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <section className="py-24 bg-slate-50 overflow-hidden">
-            <div className="container mx-auto px-6">
-                <div className="text-center mb-16 md:mb-24">
+        <section className="py-16 md:py-24 bg-slate-50 overflow-hidden border-t border-slate-100">
+            <div className="container mx-auto px-6 max-w-7xl">
+                <div className="text-center mb-14">
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-5xl font-bold font-heading text-slate-900 mb-6"
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 mb-3 tracking-tight"
                     >
-                        Our Supporting Board
+                        Advisory Board &amp; Governance
                     </motion.h2>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-xl text-slate-600 max-w-2xl mx-auto"
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-base text-slate-600 max-w-xl mx-auto font-normal leading-relaxed"
                     >
-                        The dedicated visionaries guiding our mission and ensuring our impact lasts for generations.
+                        Experienced professionals guiding organizational compliance, fiscal governance, and long-term sustainability.
                     </motion.p>
                 </div>
 
-                {/* Desktop Circular Orbit Layout */}
+                {/* Desktop Orbit Layout */}
                 <div
-                    className="hidden md:flex relative w-full max-w-[700px] aspect-square mx-auto items-center justify-center"
+                    className="hidden md:flex relative w-full max-w-[580px] aspect-square mx-auto items-center justify-center"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     {/* Central Hub */}
-                    <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        transition={{ type: "spring", duration: 1 }}
-                        className="absolute z-10 w-48 h-48 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-blue-50 text-center p-4"
-                    >
-                        <span className="text-blue-600 font-bold text-5xl mb-1">{members.length}</span>
-                        <span className="text-slate-400 text-xs uppercase tracking-widest font-bold">Members</span>
-                    </motion.div>
+                    <div className="absolute z-10 w-36 h-36 bg-white rounded-full shadow-sm flex flex-col items-center justify-center border-2 border-slate-100 text-center p-3">
+                        <span className="text-[#2563eb] font-heading font-bold text-3xl mb-0.5">{members.length}</span>
+                        <span className="text-slate-500 text-[11px] uppercase tracking-[0.14em] font-semibold">Directors</span>
+                    </div>
 
                     {/* Orbiting Container */}
                     <motion.div
-                        className="absolute inset-0 rounded-full border border-dashed border-blue-200"
+                        className="absolute inset-0 rounded-full border border-dashed border-slate-300"
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                         style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
                     >
                         {members.map((member, index) => {
                             const angle = (index / members.length) * 360;
-                            // We position items around the circle using rotation, then counter-rotate the content
 
                             return (
                                 <div
                                     key={index}
-                                    className="absolute top-1/2 left-1/2 w-28 h-28 -ml-14 -mt-14"
+                                    className="absolute top-1/2 left-1/2 w-20 h-20 -ml-10 -mt-10"
                                     style={{
-                                        transform: `rotate(${angle}deg) translate(300px)`,
+                                        transform: `rotate(${angle}deg) translate(240px)`,
                                     }}
                                 >
                                     {/* Counter-rotating Content */}
@@ -82,11 +75,10 @@ export default function BoardMembers() {
                                         className="w-full h-full relative group cursor-pointer"
                                         initial={{ rotate: -angle }}
                                         animate={{ rotate: -angle - 360 }}
-                                        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                                         style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
-                                        whileHover={{ scale: 1.2 }}
                                     >
-                                        <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg relative z-10 bg-slate-200">
+                                        <div className="w-full h-full rounded-full overflow-hidden border-2 border-white shadow-sm relative z-10 bg-slate-200">
                                             <Image
                                                 src={member.image}
                                                 alt={member.name}
@@ -96,9 +88,9 @@ export default function BoardMembers() {
                                         </div>
 
                                         {/* Tooltip */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white px-4 py-2 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none border border-slate-100">
-                                            <p className="font-bold text-slate-900 text-sm">{member.name}</p>
-                                            <p className="text-blue-600 text-xs font-bold uppercase">{member.role}</p>
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-20 pointer-events-none border border-slate-100">
+                                            <p className="font-heading font-bold text-slate-900 text-xs">{member.name}</p>
+                                            <p className="text-[#2563eb] text-[10px] font-semibold uppercase tracking-[0.12em]">{member.role}</p>
                                         </div>
                                     </motion.div>
                                 </div>
@@ -107,23 +99,19 @@ export default function BoardMembers() {
                     </motion.div>
                 </div>
 
-                {/* Mobile Grid Layout (Circular layout is too wide for mobile) */}
-                <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:hidden">
+                {/* Mobile Grid Layout */}
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 md:hidden">
                     {members.map((member, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="flex flex-col items-center text-center"
+                            className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-slate-100 shadow-2xs"
                         >
-                            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4 relative bg-slate-200">
+                            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-slate-100 shadow-2xs mb-2.5 relative bg-slate-200">
                                 <Image src={member.image} alt={member.name} fill className="object-cover" />
                             </div>
-                            <h3 className="font-bold text-slate-900 text-base leading-tight">{member.name}</h3>
-                            <p className="text-blue-600 text-xs font-bold uppercase mt-1">{member.role}</p>
-                        </motion.div>
+                            <h3 className="font-heading font-bold text-slate-900 text-sm leading-snug">{member.name}</h3>
+                            <p className="text-[#2563eb] text-[11px] font-semibold uppercase tracking-[0.12em] mt-0.5">{member.role}</p>
+                        </div>
                     ))}
                 </div>
             </div>
