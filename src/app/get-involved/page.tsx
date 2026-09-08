@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Heart, Users, Briefcase, GraduationCap, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Heart, Users, Briefcase, GraduationCap, ArrowRight, CheckCircle2, HeartPulse } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -76,15 +76,19 @@ export default function GetInvolved() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
-                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+                <div className="absolute inset-0 z-0 select-none">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
+                    <Image src="/images/involved.jpeg" alt="Students and mentors at the academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                </div>
+                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+                    <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
                         Take Action
                     </span>
-                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-white leading-[1.1] tracking-tight text-balance">
                         Be the catalyst for <br /> sustainable change.
                     </h1>
-                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
                         Whether through monthly sponsorship, professional volunteering, or organizational partnerships, you can help shape a child&apos;s future.
                     </p>
                 </div>
@@ -115,6 +119,34 @@ export default function GetInvolved() {
                     ))}
                 </div>
 
+                <div className="reveal-text mb-24 grid grid-cols-1 gap-8 rounded-2xl border border-slate-100 bg-slate-50 p-8 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-12 md:p-12">
+                    <div>
+                        <span className="mb-3.5 block text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">Community Programs</span>
+                        <h2 className="mb-4 text-3xl font-heading font-bold leading-tight tracking-tight text-slate-900">Interested in sharing your expertise?</h2>
+                        <p className="text-base leading-relaxed text-slate-600">
+                            As we transition into our new classroom space, we will have the opportunity to offer additional programs and classes to the community. Please contact us if you are interested in visiting Lilies and sharing expertise in any of these areas, or if you have additional suggestions for special programming.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="mb-4 flex items-center gap-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-white text-[#2563eb] shadow-2xs">
+                                <HeartPulse className="h-5 w-5" strokeWidth={2.2} />
+                            </div>
+                            <h3 className="text-lg font-heading font-bold text-slate-900">Areas of need</h3>
+                        </div>
+                        <ul className="grid grid-cols-1 gap-3 text-sm font-medium text-slate-700 sm:grid-cols-2">
+                            <li>General health and hygiene</li>
+                            <li>Gender-specific health and wellness</li>
+                            <li>Child development</li>
+                            <li>Career counseling</li>
+                            <li>Specialized academic tutoring</li>
+                        </ul>
+                        <a href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb] transition-colors hover:text-[#1d4ed8]">
+                            Contact the team <ArrowRight className="h-4 w-4" />
+                        </a>
+                    </div>
+                </div>
+
                 {/* 3. VOLUNTEER FORM SECTION */}
                 <div id="volunteer-form" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                     <div className="reveal-text">
@@ -125,7 +157,7 @@ export default function GetInvolved() {
                             Share your skills. <br /> Inspire young learners.
                         </h2>
                         <p className="text-base md:text-lg text-slate-600 font-normal leading-relaxed mb-6">
-                            We welcome passionate educators, artists, mentors, and administrators. From teaching foundational literacy to leading arts workshops, your time makes a lasting impact.
+                            We welcome passionate educators, artists, mentors, and administrators. From teaching foundational literacy to leading arts workshops, your time makes a lasting impact. You can also support health, wellness, child development, and career guidance as new community programming takes shape.
                         </p>
                         <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xs border border-slate-100">
                             <Image src="/images/pic8.jpeg" alt="Volunteers and students" fill className="object-cover" />

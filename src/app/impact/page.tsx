@@ -2,17 +2,18 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Award, BookOpen, Heart, TrendingUp, Sparkles } from "lucide-react";
+import { BookOpen, GraduationCap, Heart, Users, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { impactData } from "@/lib/impact-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const metrics = [
-    { value: "111", label: "Active Students", desc: "Children receiving daily after-school education and nutrition in Osu.", icon: BookOpen },
-    { value: "100%", label: "Exam Success", desc: "Pass rate for national primary graduation examinations.", icon: Award },
-    { value: "58%", label: "Female Students", desc: "Prioritizing the education of young girls to break generational poverty.", icon: Heart },
-    { value: "8+", label: "Years of Service", desc: "Continuously operating in Osu, Accra since January 2016.", icon: TrendingUp },
+    { ...impactData.sponsoredStudents, icon: BookOpen },
+    { ...impactData.highSchoolGraduatesSince2021, icon: GraduationCap },
+    { ...impactData.universityStudents, icon: Heart },
+    { ...impactData.additionalProgramChildren, icon: Users },
 ];
 
 const testimonials = [
@@ -61,15 +62,19 @@ export default function Impact() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
-                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+                <div className="absolute inset-0 z-0 select-none">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
+                    <Image src="/images/impact2.jpeg" alt="Students learning together at the academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                </div>
+                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+                    <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
                         Proven Results
                     </span>
-                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-white leading-[1.1] tracking-tight text-balance">
                         Measured impact. <br /> Real lives transformed.
                     </h1>
-                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
                         We prioritize programmatic transparency. Every contribution directly creates tangible, sustainable educational outcomes for children in Accra.
                     </p>
                 </div>
@@ -89,7 +94,7 @@ export default function Impact() {
                             <div>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-1.5 tracking-tight text-slate-900">{m.value}</h2>
                                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb] mb-2">{m.label}</p>
-                                <p className="text-sm text-slate-600 font-normal leading-relaxed">{m.desc}</p>
+                                <p className="text-sm text-slate-600 font-normal leading-relaxed">{m.description}</p>
                             </div>
                         </div>
                     ))}
@@ -134,7 +139,7 @@ export default function Impact() {
                             Our Commitment to Financial Integrity
                         </h2>
                         <p className="text-base md:text-lg text-blue-50/90 font-normal leading-relaxed max-w-xl mx-auto mb-8">
-                            Over 90% of all contributions directly fund student school fees, daily nutrition, teacher stipends, and academic materials.
+                            Contributions support student school fees, daily nutrition, teacher stipends, and academic materials.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3.5">
                             <a

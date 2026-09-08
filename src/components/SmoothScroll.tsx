@@ -14,10 +14,18 @@ export default function SmoothScroll({
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             wrapper: window,
             content: document.documentElement,
+            prevent: (node) => node.closest('[role="dialog"]') !== null,
         });
 
         function raf(time: number) {
-            lenis.raf(time);
+            const modalIsOpen = document.documentElement.dataset.modalOpen === "true";
+
+            if (modalIsOpen) {
+                lenis.stop();
+            } else {
+                lenis.start();
+                lenis.raf(time);
+            }
             requestAnimationFrame(raf);
         }
 

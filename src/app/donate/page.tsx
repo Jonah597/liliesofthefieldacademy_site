@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Donate() {
     const [amount, setAmount] = useState<number>(50);
     const [customAmount, setCustomAmount] = useState<string>("");
+    const [designation, setDesignation] = useState("Sponsor a Student");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -65,16 +66,20 @@ export default function Donate() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 border-b border-slate-100 pt-28 md:pt-36 pb-16 mb-16">
-                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16 mb-16">
+                <div className="absolute inset-0 z-0 select-none">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
+                    <Image src="/images/donate.jpeg" alt="Children supported by Lilies of the Field Academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                </div>
+                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+                    <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
                         Direct Giving
                     </span>
-                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-white leading-[1.1] tracking-tight text-balance">
                         Invest in childhood <br /> education &amp; potential.
                     </h1>
-                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
-                        100% of public donations directly fund academic instruction, arts curriculum, and student nutrition at Lilies of the Field Academy in Osu, Ghana.
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                        Your gift supports academic instruction, arts curriculum, student nutrition, and other approved needs at Lilies of the Field Academy in Osu, Ghana.
                     </p>
                 </div>
             </section>
@@ -128,6 +133,33 @@ export default function Donate() {
                                     transition={{ duration: 0.3 }}
                                 >
                                     <h2 className="text-2xl font-heading font-bold mb-6 text-slate-900 tracking-tight text-center">Select Gift Amount</h2>
+
+                                    <div className="mb-6">
+                                        <label htmlFor="donation-designation" className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-700">
+                                            Donation Designation
+                                        </label>
+                                        <select
+                                            id="donation-designation"
+                                            value={designation}
+                                            onChange={(event) => setDesignation(event.target.value)}
+                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[15px] font-medium text-slate-900 focus:border-[#2563eb] focus:outline-none transition-colors"
+                                        >
+                                            <option>Sponsor a Student</option>
+                                            <option>Building Fund</option>
+                                            <option>Teacher Fund</option>
+                                            <option>Unrestricted Gift</option>
+                                            <option>Sponsor a Special Program</option>
+                                        </select>
+                                    </div>
+
+                                    {designation === "Sponsor a Special Program" && (
+                                        <div className="mb-6 rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                                            <h3 className="mb-2 font-heading text-lg font-bold text-slate-900">Sponsor a Special Program</h3>
+                                            <p className="text-sm leading-relaxed text-slate-600">
+                                                There are often opportunities for the Lilies students to participate in additional programs or field trips that can support their studies or provide athletic or cultural experiences. While the cost varies depending on the program, it typically falls in the $100–$300 range. These fees include transportation, admission, and often funds to provide a meal to the participants. We will announce any potential programs when they are available.
+                                            </p>
+                                        </div>
+                                    )}
 
                                     {/* Impact Visualizer */}
                                     <div className="bg-[#2563eb] rounded-2xl p-6 mb-6 text-center flex flex-col items-center justify-center text-white relative overflow-hidden">

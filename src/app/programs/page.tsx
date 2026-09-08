@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BookOpen, Music, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { impactData } from "@/lib/impact-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +16,7 @@ const programs = [
         desc: "Core literacy, numeracy, and STEM education designed to bridge learning gaps for primary-age children. Our tailored curriculum ensures every child reads with confidence.",
         features: ["After-school homework assistance", "One-on-one literacy tutoring", "Foundational math and science", "English language proficiency"],
         image: "/images/pic9.jpeg",
-        stats: "111 Students Enrolled"
+        stats: `${impactData.sponsoredStudents.value} Students Currently Sponsored`
     },
     {
         icon: Music,
@@ -31,7 +32,7 @@ const programs = [
         desc: "Empowering young girls and boys with life skills, public speaking, health awareness, and community responsibility to nurture the next generation of African leaders.",
         features: ["Girls' empowerment circles", "Community service projects", "Public speaking practice", "Health & hygiene education"],
         image: "/images/pic8.jpeg",
-        stats: "58% Female Representation"
+        stats: `${impactData.additionalProgramChildren.value} Additional Children Reached Through After-School & Dance Programs`
     },
 ];
 
@@ -66,15 +67,19 @@ export default function Programs() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
-                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+                <div className="absolute inset-0 z-0 select-none">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
+                    <Image src="/images/program2.jpeg" alt="Students participating in cultural arts" fill className="object-cover opacity-75 md:opacity-85" priority />
+                </div>
+                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+                    <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
                         Holistic Education
                     </span>
-                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-white leading-[1.1] tracking-tight text-balance">
                         Igniting potential <br /> across disciplines.
                     </h1>
-                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
                         We blend rigorous academic support with traditional arts and essential life skills to cultivate well-rounded, confident learners.
                     </p>
                 </div>
@@ -138,9 +143,24 @@ export default function Programs() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { day: "Monday – Thursday", time: "3:30 PM – 5:30 PM", desc: "Academic literacy, mathematics support, reading circles, and structured homework completion." },
-                            { day: "Friday Afternoons", time: "3:00 PM – 6:00 PM", desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development." },
-                            { day: "Saturday Workshops", time: "9:00 AM – 1:00 PM", desc: "Leadership seminars, health & hygiene education, sports, and guest mentorship series." },
+                            {
+                                 day: "Monday – Thursday", 
+                                 time: "3:30 PM – 5:30 PM", 
+                                 desc: "Academic literacy, mathematics support, reading circles, and structured homework completion." 
+                                },
+
+                            {
+                              day: "Friday Evenings",
+                              time:"3:00 PM – 6:00 PM",
+                              desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development."
+                            },
+
+                            {
+                                 day: "Saturday Workshops", 
+                                 time: "9:00 AM – 1:00 PM", 
+                                 desc: "Leadership seminars, health & hygiene education, sports, and guest mentorship series." 
+                                },
+
                         ].map((sched, i) => (
                             <div key={i} className="reveal-text bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-2xs flex flex-col gap-2.5">
                                 <span className="text-[#2563eb] font-semibold text-xs uppercase tracking-[0.14em]">{sched.time}</span>

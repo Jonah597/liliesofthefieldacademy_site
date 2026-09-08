@@ -1,16 +1,108 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, X } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AnimatePresence, motion } from "framer-motion";
+import { impactData } from "@/lib/impact-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const boardMembers = [
+    {
+        name: "Zach",
+        role: "Board Member",
+        desc: "UNKNOWN",
+        img: "/images/pic1.jpeg"
+    },
+    {
+        name: "Manana",
+        role: "Board Member",
+        desc: "UNKOWN",
+        img: "/images/pic2.jpeg"
+    },
+    {
+        name: "Marian Murphy Powell",
+        role: "Board Member",
+        desc: "UNKOWN",
+        img: "/images/pic3.jpeg"
+    },
+    {
+        name: "Oyikwan",
+        role: "Board Member",
+        desc: "UNKOWN",
+        img: "/images/pic4.jpeg"
+    },
+    {
+        name: "Fiona Bryan",
+        role: "Board Member",
+        desc: "Focuses on child wellness, nutrition, and community health initiatives.",
+        img: "/images/pic5.jpeg"
+    },
+    {
+        name: "Donna Phillips",
+        role: "Board Member",
+        desc: "BS State University Buffalo, NY, MS and certification of advanced studies at State University of Brockport, NY 1978. Donna taught Nutrition and Health Sciences at Brockport College and a 34 year career as a teacher and administrator for Rochester City Schools. She participated in developing National and State legislation for Education, and directed adult and Family Literacy programs for 8,000 students in Rochester, New York. Donna was also a national presenter on topics of literacy and School to Work transition . Today she is retired from teaching, and ais n Organic Vegetable farmer.",
+        img: "/images/pic6.jpeg"
+    },
+];
+
 export default function About() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const [selectedMember, setSelectedMember] = useState<(typeof boardMembers)[number] | null>(null);
+
+    const closeBio = () => {
+        setSelectedMember(null);
+        requestAnimationFrame(() => triggerRef.current?.focus());
+    };
+
+    useEffect(() => {
+        if (!selectedMember) return;
+
+        const previousBodyOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        document.documentElement.dataset.modalOpen = "true";
+
+        const focusFrame = requestAnimationFrame(() => closeButtonRef.current?.focus());
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                closeBio();
+                return;
+            }
+
+            if (event.key !== "Tab" || !modalRef.current) return;
+
+            const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement?.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement?.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            cancelAnimationFrame(focusFrame);
+            document.body.style.overflow = previousBodyOverflow;
+            delete document.documentElement.dataset.modalOpen;
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [selectedMember]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -40,18 +132,31 @@ export default function About() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-28 md:pt-36 pb-16 border-b border-slate-100">
-                <div className="container relative z-10 mx-auto px-6 max-w-4xl text-center">
-                    <span className="reveal-text uppercase text-[#2563eb] font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-50/80 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+                <div className="absolute inset-0 z-0 select-none">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
+                    <Image
+                        src="/images/about_hero.jpeg"
+                        alt="Children studying at Lilies of the Field Academy"
+                        fill
+                        className="object-cover opacity-75 md:opacity-85"
+                        priority
+                    />
+                </div>
+
+                <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
+                    <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
                         Our Story
                     </span>
-                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-slate-900 leading-[1.1] tracking-tight text-balance">
+                    <h1 className="reveal-text text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-bold mb-5 text-white leading-[1.1] tracking-tight text-balance">
                         The journey to <br /> opportunity begins here.
                     </h1>
-                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
+                    <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed text-balance">
                         Lilies of the Field Academy was established to provide children in Osu with the academic foundation, artistic discipline, and mentorship needed to thrive.
                     </p>
                 </div>
+
+                               
             </section>
 
             {/* 2. VISION & MISSION - FOUNDERS SECTION */}
@@ -95,7 +200,10 @@ export default function About() {
                         </div>
                         <h2 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 tracking-tight">Our Progress</h2>
                         <p className="text-base text-slate-600 leading-relaxed font-normal">
-                            From an initial cohort of 24 students in 2016, our academy has expanded to support 111 active students who attend public school during the day and come to Lilies for academic tutoring, arts education, and life skills every afternoon.
+                            Lilies currently sponsors {impactData.sponsoredStudents.value} students attending local schools. An additional {impactData.additionalProgramChildren.value} local children participate in after-school support and dance programs, extending the academy&apos;s reach beyond sponsored students.
+                        </p>
+                        <p className="text-base text-slate-600 leading-relaxed font-normal">
+                            Since 2021, {impactData.highSchoolGraduatesSince2021.value} Lilies students have graduated from high school, and {impactData.universityStudents.value} graduates are currently attending university.
                         </p>
                     </div>
                 </div>
@@ -111,7 +219,7 @@ export default function About() {
                         A Dedicated School Facility for Osu.
                     </h2>
                     <p className="reveal-text text-base sm:text-lg md:text-[19px] text-blue-50/90 max-w-2xl mx-auto font-normal leading-relaxed mb-8">
-                        We are actively fundraising to construct our permanent headquarters in Accra, complete with modern classrooms for grades 1–6, dedicated arts rehearsal studios, and teacher accommodations.
+                        We are actively fundraising to construct our permanent headquarters in Accra, complete with 3 state of the art classrooms, restrooms, and meeting spaces.
                     </p>
                     <Link href="/get-involved" className="reveal-text inline-flex items-center gap-2 bg-white text-[#2563eb] px-7 py-3.5 rounded-full text-base font-semibold hover:bg-slate-100 transition-colors shadow-sm active:translate-y-0.5">
                         Support the Building Fund <ArrowRight className="w-4 h-4" />
@@ -162,63 +270,100 @@ export default function About() {
                 <div className="reveal-text text-center">
                     <h3 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-8">Board of Directors</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {[
-                            {
-                                name: "Rachel Johnson",
-                                role: "Board Member",
-                                desc: "Dedicated to expanding international education and community partnerships.",
-                                img: "/images/pic1.jpeg"
-                            },
-
-                            {
-                                name: "Matthew Wiggin",
-                                role: "Board Member",
-                                desc: "Passionate about leveraging digital tools to empower underserved students.",
-                                img: "/images/pic2.jpeg"
-                            },
-
-                            {
-                                name: "Marian Murphy Powell",
-                                role: "Board Member",
-                                desc: "Advocate for performing arts curriculum and creative development.",
-                                img: "/images/pic3.jpeg"
-                            },
-
-                            {
-                                name: "Elaina Watley",
-                                role: "Board Member",
-                                desc: "Specializes in strategic governance and nonprofit operational growth.",
-                                img: "/images/pic4.jpeg"
-                            },
-
-                            {
-
-                                name: "Fiona Bryan",
-                                role: "Board Member",
-                                desc: "Focuses on child wellness, nutrition, and community health initiatives.",
-                                img: "/images/pic5.jpeg"
-                            },
-
-                            {
-                                name: "Donna Phillips",
-                                role: "Board Member",
-                                desc: "Leads institutional fundraising and sustainable donor relations.",
-                                img: "/images/pic6.jpeg"
-                            },
-
-                        ].map((boardMember, i) => (
-                            <div key={i} className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xs transition-all duration-300">
-                                <div className="relative w-20 h-20 mb-3.5 rounded-full overflow-hidden border border-white shadow-2xs">
-                                    <Image src={boardMember.img} alt={boardMember.name} fill className="object-cover" />
-                                </div>
-                                <h4 className="text-base font-heading font-bold text-slate-900 mb-0.5">{boardMember.name}</h4>
-                                <p className="text-[#2563eb] font-semibold uppercase tracking-[0.14em] text-[11px] mb-2">{boardMember.role}</p>
-                                <p className="text-xs text-slate-600 leading-relaxed font-normal">{boardMember.desc}</p>
+                        {boardMembers.map((boardMember) => (
+                            <div
+                                key={boardMember.name}
+                                className="group flex flex-col items-center rounded-2xl border border-slate-100 bg-slate-50 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-md"
+                            >
+                                <button
+                                    type="button"
+                                    onClick={(event) => {
+                                        triggerRef.current = event.currentTarget;
+                                        setSelectedMember(boardMember);
+                                    }}
+                                    className="flex w-full flex-col items-center focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+                                    aria-label={`View bio for ${boardMember.name}`}
+                                >
+                                    <div className="relative mb-3.5 h-20 w-20 overflow-hidden rounded-full border border-white shadow-2xs transition-transform duration-500 group-hover:scale-105">
+                                        <Image
+                                            src={boardMember.img}
+                                            alt={boardMember.name}
+                                            width={80}
+                                            height={80}
+                                            sizes="80px"
+                                            className="h-20 w-20 object-cover"
+                                        />
+                                    </div>
+                                    <h4 className="mb-0.5 text-base font-heading font-bold text-slate-900">{boardMember.name}</h4>
+                                    <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{boardMember.role}</p>
+                                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 transition-colors group-hover:text-[#2563eb]">View bio <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+                                </button>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
+
+            <AnimatePresence>
+                {selectedMember && (
+                    <motion.div
+                        className="fixed inset-0 z-[120] flex items-start justify-start overflow-hidden bg-slate-950/70 p-4 pt-2 backdrop-blur-md sm:p-8 sm:pt-4 md:p-12 md:pt-6"
+                        role="presentation"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35 }}
+                        onClick={closeBio}
+                    >
+                        <motion.div
+                            ref={modalRef}
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="board-member-name"
+                            tabIndex={-1}
+                            className="relative mx-auto mt-0 max-h-[calc(100vh-1rem)] min-h-[50vh] w-full max-w-4xl overscroll-contain overflow-y-auto overflow-x-hidden rounded-3xl bg-white shadow-2xl sm:mt-0 sm:max-h-[calc(100vh-2rem)] md:mt-0 md:max-h-[calc(100vh-3rem)]"
+                            initial={{ opacity: 0, scale: 0.88, y: 40, rotateX: 8 }}
+                            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+                            exit={{ opacity: 0, scale: 0.94, y: 24 }}
+                            transition={{ type: "spring", stiffness: 220, damping: 22, mass: 0.8 }}
+                            onClick={(event) => event.stopPropagation()}
+                            onWheelCapture={(event) => event.stopPropagation()}
+                            onTouchMoveCapture={(event) => event.stopPropagation()}
+                        >
+                            <button
+                                type="button"
+                                ref={closeButtonRef}
+                                onClick={closeBio}
+                                className="absolute right-4 top-4 z-20 rounded-full bg-white/90 p-2.5 text-slate-600 shadow-md transition-colors hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                                aria-label="Close board member bio"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                            <div className="flex min-h-[50vh] flex-col p-8 text-left sm:p-10 md:p-14">
+                                <motion.div
+                                    className="relative mb-8 h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-slate-200 shadow-lg ring-4 ring-white sm:h-40 sm:w-40"
+                                    initial={{ opacity: 0, x: -35 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
+                                >
+                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover" priority />
+                                </motion.div>
+                                <motion.div
+                                    className="flex max-w-2xl flex-col"
+                                    initial={{ opacity: 0, x: 28 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.2, duration: 0.55, ease: "easeOut" }}
+                                >
+                                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{selectedMember.role}</p>
+                                    <h2 id="board-member-name" className="mb-4 text-3xl font-heading font-bold tracking-tight text-slate-900 sm:text-4xl">{selectedMember.name}</h2>
+                                    <div className="mb-5 h-px w-16 bg-[#2563eb]" />
+                                    <p className="text-base leading-relaxed text-slate-600">{selectedMember.desc}</p>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

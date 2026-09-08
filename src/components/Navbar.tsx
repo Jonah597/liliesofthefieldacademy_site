@@ -46,7 +46,7 @@ export default function Navbar() {
           <div
             className={cn(
               "relative transition-all duration-300 rounded-xl p-1 bg-white shadow-xs border border-slate-100/90 flex items-center justify-center",
-              scrolled ? "h-11 w-11 md:h-12 md:w-12" : "h-12 w-12 md:h-13 md:w-13"
+              scrolled ? "h-16 w-16 md:h-22 md:w-22" : "h-24 w-24 md:h-24 md:w-24"
             )}
           >
             <Image
@@ -123,7 +123,7 @@ export default function Navbar() {
         </button>
 
         {/* Backdrop Overlay */}
-        <div 
+        <div
           className={cn(
             "fixed inset-0 z-[104] bg-slate-900/25 backdrop-blur-xs transition-opacity duration-300 lg:hidden",
             mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
