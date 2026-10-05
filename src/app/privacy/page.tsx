@@ -1,3 +1,24 @@
+/**
+ * FILE: app/privacy/page.tsx
+ *
+ * PURPOSE:
+ * Provides the website's privacy policy and explains how supporter information is
+ * handled when someone uses the site, fills out forms, or donates.
+ *
+ * RESPONSIBILITIES:
+ * - Describes what information is collected from site visitors
+ * - Explains why the information is used and how it is protected
+ * - Gives contact information for privacy questions
+ * - Keeps the legal language accessible to non-legal readers
+ *
+ * USED BY:
+ * Next.js route: /privacy
+ *
+ * IMPORTANT:
+ * This is informational content. It should be reviewed with a legal or compliance
+ * professional before publication if the organization expects formal legal coverage.
+ */
+
 "use client";
 
 import { useEffect, useRef } from "react";

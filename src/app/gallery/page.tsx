@@ -1,3 +1,24 @@
+/**
+ * FILE: app/gallery/page.tsx
+ *
+ * PURPOSE:
+ * Shows a filtered visual archive of the academy's work, including classroom life,
+ * cultural arts, community moments, and milestone events.
+ *
+ * RESPONSIBILITIES:
+ * - Displays a hero section introducing the image archive
+ * - Provides category tabs to filter the gallery by theme
+ * - Presents images in a responsive grid that highlights each photo on hover
+ * - Encourages visitors to support the academy through a donation call-to-action
+ *
+ * USED BY:
+ * Next.js route: /gallery
+ *
+ * DATA:
+ * The gallery is a static local array of image paths and category labels. This is a
+ * content-driven page rather than a CMS-backed gallery.
+ */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";

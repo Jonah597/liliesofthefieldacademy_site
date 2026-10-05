@@ -1,3 +1,28 @@
+/**
+ * FILE: app/about/page.tsx
+ *
+ * PURPOSE:
+ * Describes the mission, founding story, leadership, and future vision of
+ * Lilies of the Field Academy. This page gives visitors the context behind the
+ * programs and fundraising work shown elsewhere on the site.
+ *
+ * RESPONSIBILITIES:
+ * - Introduces the founders and the local community context in Osu, Ghana
+ * - Explains the academy's core pledge and current program impact
+ * - Highlights the planned capital initiative for a permanent school facility
+ * - Profiles institutional leadership and board members
+ * - Opens a modal with a longer biography when a board member is selected
+ * - Uses GSAP scroll-based reveal animations to create a polished narrative flow
+ *
+ * USED BY:
+ * Next.js route: /about
+ *
+ * DEPENDENCIES:
+ * - @/lib/impact-data for the published impact numbers displayed on the page
+ * - GSAP + ScrollTrigger for reveal animations on scroll
+ * - framer-motion for the board member detail modal
+ */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -13,39 +38,63 @@ gsap.registerPlugin(ScrollTrigger);
 
 const boardMembers = [
     {
-        name: "Zach",
+        name: "Zach McCormic",
         role: "Board Member",
-        desc: "UNKNOWN",
+        desc: `Zach McCormick has served as a Board Member since 2022. He earned his undergraduate degree from Stonehill College in 2018, where he majored in Finance and was a member of the Men's Soccer program. He later earned his MBA from Indiana University's Kelley School of Business in 2022.
+
+Zach began his professional career in the Aerospace & Defense industry, where he spent seven years before transitioning into financial consulting at a boutique firm.
+
+Zach first met Kim Wiggin while attending Suffield Academy in 2012 and was one of ten students who went on the inaugural trip to Ghana in 2013. During the trip, he volunteered at an orphanage and visited local schools, where he spoke with students about the importance of education. The experience gave him an immediate and lasting connection to the people and culture of Ghana. He returned the following summer in 2014, further strengthening his desire to remain involved and contribute to the community.
+
+Zach initially supported the organization by sponsoring students at the Lilies of the Field Academy. Eager to become more involved, he welcomed the opportunity to join the Board in 2022 and continue supporting the organization's mission.
+
+An avid traveler, Zach has visited more than 30 countries and has lived and worked abroad in Barcelona, Spain, and Singapore. He currently lives in Alexandria, Virginia, with his fiancée, Rebecca, and their dog, Penny.`,
         img: "/images/pic1.jpeg"
     },
     {
-        name: "Manana",
+        name: "Mariana",
         role: "Board Member",
-        desc: "UNKOWN",
+        desc: `Mariana is a valued member of the board whose support reflects a deep commitment to mentoring, community care, and educational opportunity. Her involvement continues to strengthen the academy's mission by bringing thoughtful leadership and a generous spirit to the work of serving students and families.`,
         img: "/images/pic2.jpeg"
     },
     {
         name: "Marian Murphy Powell",
         role: "Board Member",
-        desc: "UNKOWN",
-        img: "/images/pic3.jpeg"
+        desc: `Marian Murphy Powell is an accomplished singer, theatrical artist, educator, and arts advocate whose career has been dedicated to the performing arts, arts education, and the development of young artists.
+
+With decades of experience as a professional performer and educator, Marian brings to nonprofit board service a unique combination of artistic leadership, teaching expertise, institutional knowledge, and a deep commitment to nurturing the next generation. Alongside her performing career, Marian has devoted significant time and energy to arts education and mentorship as a private voice teacher and as an adjunct voice faculty member in high schools, colleges, and universities.
+
+She is also an alumna of the New England Music Camp, where she has served on the faculty for over three decades and has been the Recruitment Coordinator for the last seven years. Marian is especially proud to serve as a board member of Lilies School, an organization whose mission and development are deeply meaningful to her. She was privileged to be present when the idea for the school first took hold and has had the opportunity to witness its vision grow from an idea into a living educational community.
+
+Her commitment to Lilies reflects her belief in the transformative power of education, mentorship, creativity, and a strong community. She holds a Bachelor's degree and a Performer's Certificate of Merit from the School of Music at the State University of New York at Fredonia. She earned her Actor's Equity Association membership through the Tennessee Repertory Theatre's Young Artist Program.
+
+Through her board service, teaching, performing, and mentorship, Marian is committed to supporting organizations that expand access to meaningful educational and artistic experiences and invest in the growth, confidence, and potential of young people.`,
+        img: "/images/murphy.jpeg"
     },
     {
-        name: "Oyikwan",
+        name: "Oyikwan Asante",
         role: "Board Member",
-        desc: "UNKOWN",
-        img: "/images/pic4.jpeg"
+        desc: `Oyikwan Asante is a Ghanaian-American entrepreneur and investor and the Co-Founder and Group CEO of AP Group, a diversified business platform with interests across hospitality, commodities, real estate, and consumer ventures.
+
+Prior to founding AP Group, Oyikwan served as Country Manager for Ghana at Gemcorp Capital, a global investment firm with over $7 billion in assets under management. He attended Suffield Academy, where his connection to Lilies began through its founder, who was a faculty member during his time there, and later graduated from Skidmore College in New York.
+
+Oyikwan is passionate about family, building the next generation of African companies, and helping shape Ghana's future. He is committed to supporting initiatives that create opportunity, empower young people, and strengthen communities.`,
+        img: "/images/Asante.jpeg"
     },
     {
         name: "Fiona Bryan",
         role: "Board Member",
-        desc: "Focuses on child wellness, nutrition, and community health initiatives.",
+        desc: `Fiona Bryan is dedicated to advancing child wellness, nutrition, and community health initiatives. Her leadership helps ensure that students are supported not only academically, but also physically, emotionally, and holistically as they grow and thrive within the academy community.`,
         img: "/images/pic5.jpeg"
     },
     {
         name: "Donna Phillips",
         role: "Board Member",
-        desc: "BS State University Buffalo, NY, MS and certification of advanced studies at State University of Brockport, NY 1978. Donna taught Nutrition and Health Sciences at Brockport College and a 34 year career as a teacher and administrator for Rochester City Schools. She participated in developing National and State legislation for Education, and directed adult and Family Literacy programs for 8,000 students in Rochester, New York. Donna was also a national presenter on topics of literacy and School to Work transition . Today she is retired from teaching, and ais n Organic Vegetable farmer.",
+        desc: `Donna Phillips earned her B.S. from the State University of New York at Buffalo and later completed her M.S. and certification of advanced studies at the State University of New York at Brockport. She taught Nutrition and Health Sciences at Brockport College and spent a 34-year career as a teacher and administrator for Rochester City Schools.
+
+She participated in developing national and state legislation for education and directed adult and family literacy programs serving 8,000 students in Rochester, New York. Donna was also a national presenter on topics of literacy and school-to-work transitions.
+
+Today, she is retired from teaching and is an organic vegetable farmer, continuing to contribute to her community through both service and stewardship.`,
         img: "/images/pic6.jpeg"
     },
 ];
@@ -341,12 +390,12 @@ export default function About() {
                             </button>
                             <div className="flex min-h-[50vh] flex-col p-8 text-left sm:p-10 md:p-14">
                                 <motion.div
-                                    className="relative mb-8 h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-slate-200 shadow-lg ring-4 ring-white sm:h-40 sm:w-40"
+                                    className="relative mb-8 h-[340px] w-full max-w-[240px] shrink-0 overflow-hidden rounded-2xl bg-slate-200 shadow-lg ring-4 ring-white sm:h-[400px] sm:max-w-[270px] md:h-[440px] md:max-w-[280px]"
                                     initial={{ opacity: 0, x: -35 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
                                 >
-                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover" priority />
+                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover object-center" priority />
                                 </motion.div>
                                 <motion.div
                                     className="flex max-w-2xl flex-col"
@@ -355,9 +404,21 @@ export default function About() {
                                     transition={{ delay: 0.2, duration: 0.55, ease: "easeOut" }}
                                 >
                                     <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{selectedMember.role}</p>
-                                    <h2 id="board-member-name" className="mb-4 text-3xl font-heading font-bold tracking-tight text-slate-900 sm:text-4xl">{selectedMember.name}</h2>
-                                    <div className="mb-5 h-px w-16 bg-[#2563eb]" />
-                                    <p className="text-base leading-relaxed text-slate-600">{selectedMember.desc}</p>
+                                    <div className="mb-4 inline-flex w-fit flex-col items-start">
+                                        <h2
+                                            id="board-member-name"
+                                            className="text-3xl font-heading font-bold tracking-tight text-slate-900 sm:text-4xl"
+                                        >
+                                            {selectedMember.name}
+                                        </h2>
+                                        <span className="mt-2 h-1.5 w-full rounded-full bg-gradient-to-r from-[#2563eb] via-[#60a5fa] to-[#bfdbfe] shadow-[0_0_18px_rgba(37,99,235,0.25)]" />
+                                    </div>
+                                    <p
+                                        className="max-w-3xl whitespace-pre-line text-center text-base leading-8 text-slate-600 md:text-justify"
+                                        style={{ textAlign: "justify" }}
+                                    >
+                                        {selectedMember.desc}
+                                    </p>
                                 </motion.div>
                             </div>
                         </motion.div>

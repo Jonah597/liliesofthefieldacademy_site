@@ -1,3 +1,24 @@
+/**
+ * FILE: app/contact/page.tsx
+ *
+ * PURPOSE:
+ * Provides the main contact experience for the website. Visitors can find the
+ * organization's physical location, phone, email, and a basic inquiry form.
+ *
+ * RESPONSIBILITIES:
+ * - Shows the primary contact and support channels for the academy
+ * - Presents a simple inquiry form for general questions and partnership requests
+ * - Provides a client-side success state after the form is submitted
+ * - Adds GSAP scroll reveal animations to make the page feel more polished
+ *
+ * USED BY:
+ * Next.js route: /contact
+ *
+ * IMPORTANT:
+ * The form is currently front-end only and does not submit to a backend service.
+ * The success state is a UX placeholder until a real intake workflow is added.
+ */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -18,13 +39,13 @@ const contactDetails = [
     {
         icon: Mail,
         title: "Email Inquiries",
-        detail: "info@theliliesfoundation.org",
+        detail: "theliliesfoundation@gmail.com",
         sub: "Direct general inquiries, partnership proposals, and press."
     },
     {
         icon: Phone,
         title: "Phone Support",
-        detail: "860-836-7468",
+        detail: "+1(860)-836-7468",
         sub: "Available Monday – Friday, 9:00 AM – 5:00 PM GMT."
     }
 ];

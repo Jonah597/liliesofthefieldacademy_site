@@ -1,3 +1,25 @@
+/**
+ * FILE: app/contact/BoardMembers.tsx
+ *
+ * PURPOSE:
+ * Displays the advisory board and governance team in a compact, animated layout.
+ * This component gives the site a visible leadership presence without requiring a
+ * separate full-page section.
+ *
+ * RESPONSIBILITIES:
+ * - Renders a circular orbit-style board layout on desktop screens
+ * - Falls back to a simple grid on mobile screens
+ * - Shows each member's name and title in a tooltip or card
+ * - Creates a visual sense of institutional leadership and community oversight
+ *
+ * USED BY:
+ * The contact page: /contact
+ *
+ * IMPORTANT:
+ * The board members shown here are not the same as the detailed bios presented on
+ * the About page. This component is a lightweight, visual leadership summary.
+ */
+
 "use client";
 
 import { motion } from "framer-motion";

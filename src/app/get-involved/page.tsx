@@ -1,3 +1,25 @@
+/**
+ * FILE: app/get-involved/page.tsx
+ *
+ * PURPOSE:
+ * Invites supporters, volunteers, and partners to contribute to the academy's work.
+ * The page turns abstract support into concrete entry points such as donation,
+ * volunteering, and corporate partnership.
+ *
+ * RESPONSIBILITIES:
+ * - Explains the main ways supporters can participate in the mission
+ * - Displays a volunteer application form for interested contributors
+ * - Connects visitors to donation and contact flows from the main navigation
+ * - Uses GSAP motion to animate the page as it scrolls into view
+ *
+ * USED BY:
+ * Next.js route: /get-involved
+ *
+ * IMPORTANT:
+ * The volunteer form is currently a front-end interaction only. It does not yet post
+ * to a backend or external platform.
+ */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";

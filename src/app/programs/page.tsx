@@ -1,3 +1,25 @@
+/**
+ * FILE: app/programs/page.tsx
+ *
+ * PURPOSE:
+ * Describes the academy's core educational programs and demonstrates how the
+ * organization combines academics, arts, leadership, and care into a coherent model.
+ *
+ * RESPONSIBILITIES:
+ * - Introduces each primary program pillar through a two-column story layout
+ * - Lists the outcomes or activities associated with every major initiative
+ * - Highlights the weekly rhythm of the academy's operations
+ * - Includes a final donation call-to-action for supporters
+ * - Uses GSAP reveal effects on content sections for a polished UX
+ *
+ * USED BY:
+ * Next.js route: /programs
+ *
+ * DATA:
+ * The program highlights are defined in a local array on this page and reference
+ * the shared impact stats dataset for consistency with the project's broader metrics.
+ */
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -150,8 +172,8 @@ export default function Programs() {
                                 },
 
                             {
-                              day: "Friday Evenings",
-                              time:"3:00 PM – 6:00 PM",
+                              day: "Weekday Evenings",
+                              time:"6:00 PM – 8:00 PM",
                               desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development."
                             },
 

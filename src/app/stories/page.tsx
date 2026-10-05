@@ -1,3 +1,24 @@
+/**
+ * FILE: app/stories/page.tsx
+ *
+ * PURPOSE:
+ * Shares the academy's student and community stories to make the impact tangible and
+ * human. This page turns metrics into real narratives that supporters can connect with.
+ *
+ * RESPONSIBILITIES:
+ * - Presents a grid of story cards with category tags, dates, and reading time
+ * - Highlights academically and culturally oriented narratives from student life
+ * - Encourages donors to support the next milestone in the community's journey
+ * - Uses GSAP scroll reveal animations to add movement to the story cards
+ *
+ * USED BY:
+ * Next.js route: /stories
+ *
+ * NOTE:
+ * These cards are content placeholders rather than a CMS-driven publishing workflow.
+ * They are a static editorial view of the academy's ongoing story archive.
+ */
+
 "use client";
 
 import { useEffect, useRef } from "react";

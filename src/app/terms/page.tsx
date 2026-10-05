@@ -1,3 +1,24 @@
+/**
+ * FILE: app/terms/page.tsx
+ *
+ * PURPOSE:
+ * Provides the website's Terms of Service and clarifies the rules for using the
+ * organization's public-facing site.
+ *
+ * RESPONSIBILITIES:
+ * - Explains basic visitor expectations for using the website
+ * - Covers donation-related terms and use of third-party payment processing
+ * - States the ownership of content and the organization's right to revise rules
+ * - Gives a contact route for questions about the legal terms
+ *
+ * USED BY:
+ * Next.js route: /terms
+ *
+ * IMPORTANT:
+ * This page is an informational legal summary and should be reviewed with legal
+ * counsel before being treated as a full binding policy document.
+ */
+
 "use client";
 
 import { useEffect, useRef } from "react";

@@ -1,3 +1,24 @@
+/**
+ * FILE: app/impact/page.tsx
+ *
+ * PURPOSE:
+ * Shows the academy's measurable outcomes so supporters can see the practical effect
+ * of donations, volunteer support, and educational programming.
+ *
+ * RESPONSIBILITIES:
+ * - Summarizes key impact metrics using the shared impact data source
+ * - Presents student testimony and qualitative evidence of educational progress
+ * - Reassures donors through transparency language and a financial integrity section
+ * - Uses GSAP reveal effects to animate storytelling sections into view
+ *
+ * USED BY:
+ * Next.js route: /impact
+ *
+ * DATA:
+ * This page reads from the shared impact data module so the numbers stay consistent
+ * across the home, about, programs, donate, and impact pages.
+ */
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -146,7 +167,7 @@ export default function Impact() {
                                 href="/donate"
                                 className="bg-[#22c55e] text-white px-7 py-3 rounded-full text-[15px] font-semibold hover:bg-[#16a34a] transition-colors shadow-xs active:translate-y-0.5"
                             >
-                                Back Our Students
+                                Support Our Students
                             </a>
                             <a
                                 href="/contact"
