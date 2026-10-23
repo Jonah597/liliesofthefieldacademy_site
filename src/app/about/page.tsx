@@ -49,7 +49,8 @@ Zach first met Kim Wiggin while attending Suffield Academy in 2012 and was one o
 Zach initially supported the organization by sponsoring students at the Lilies of the Field Academy. Eager to become more involved, he welcomed the opportunity to join the Board in 2022 and continue supporting the organization's mission.
 
 An avid traveler, Zach has visited more than 30 countries and has lived and worked abroad in Barcelona, Spain, and Singapore. He currently lives in Alexandria, Virginia, with his fiancée, Rebecca, and their dog, Penny.`,
-        img: "/images/pic1.jpeg"
+        img: "/images/zach.png",
+        imagePosition: "50% 12%"
     },
     {
         name: "Mariana",
@@ -205,7 +206,7 @@ export default function About() {
                     </p>
                 </div>
 
-                               
+
             </section>
 
             {/* 2. VISION & MISSION - FOUNDERS SECTION */}
@@ -341,6 +342,7 @@ export default function About() {
                                             height={80}
                                             sizes="80px"
                                             className="h-20 w-20 object-cover"
+                                            style={boardMember.imagePosition ? { objectPosition: boardMember.imagePosition } : undefined}
                                         />
                                     </div>
                                     <h4 className="mb-0.5 text-base font-heading font-bold text-slate-900">{boardMember.name}</h4>
@@ -395,7 +397,14 @@ export default function About() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
                                 >
-                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover object-center" priority />
+                                    <Image
+                                        src={selectedMember.img}
+                                        alt={selectedMember.name}
+                                        fill
+                                        className="object-cover"
+                                        style={selectedMember.imagePosition ? { objectPosition: selectedMember.imagePosition } : { objectPosition: "center" }}
+                                        priority
+                                    />
                                 </motion.div>
                                 <motion.div
                                     className="flex max-w-2xl flex-col"

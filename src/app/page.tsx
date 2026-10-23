@@ -81,7 +81,7 @@ export default function Home() {
             scrollTrigger: {
               trigger: el,   // Watch this specific element
               start: "top 92%", // Start the animation when the top of the element
-                               // is 92% down the viewport (just before it fully enters)
+              // is 92% down the viewport (just before it fully enters)
               toggleActions: "play none none none", // Only play forward; don't reverse on scroll up
             },
           }
@@ -120,7 +120,7 @@ export default function Home() {
           SECTION 1: HERO
           Full-viewport hero with gradient background, hero image, headline, and CTAs.
           ════════════════════════════════════════════════ */}
-      <section className="relative min-h-[90svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-20">
+      <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-20">
         {/* Background image + gradient overlay stack */}
         <div className="absolute inset-0 z-0 select-none">
           {/* Semi-transparent blue gradient overlay layered on top of the photo.

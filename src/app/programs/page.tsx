@@ -37,7 +37,7 @@ const programs = [
         title: "Academic Foundation",
         desc: "Core literacy, numeracy, and STEM education designed to bridge learning gaps for primary-age children. Our tailored curriculum ensures every child reads with confidence.",
         features: ["After-school homework assistance", "One-on-one literacy tutoring", "Foundational math and science", "English language proficiency"],
-        image: "/images/pic9.jpeg",
+        image: "/images/new2.jpeg",
         stats: `${impactData.sponsoredStudents.value} Students Currently Sponsored`
     },
     {
@@ -53,7 +53,7 @@ const programs = [
         title: "Leadership & Mentorship",
         desc: "Empowering young girls and boys with life skills, public speaking, health awareness, and community responsibility to nurture the next generation of African leaders.",
         features: ["Girls' empowerment circles", "Community service projects", "Public speaking practice", "Health & hygiene education"],
-        image: "/images/pic8.jpeg",
+        image: "/images/latest1.jpeg",
         stats: `${impactData.additionalProgramChildren.value} Additional Children Reached Through After-School & Dance Programs`
     },
 ];
@@ -166,22 +166,22 @@ export default function Programs() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
                             {
-                                 day: "Monday – Thursday", 
-                                 time: "3:30 PM – 5:30 PM", 
-                                 desc: "Academic literacy, mathematics support, reading circles, and structured homework completion." 
-                                },
-
-                            {
-                              day: "Weekday Evenings",
-                              time:"6:00 PM – 8:00 PM",
-                              desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development."
+                                day: "Monday – Thursday",
+                                time: "3:30 PM – 5:30 PM",
+                                desc: "Academic literacy, mathematics support, reading circles, and structured homework completion."
                             },
 
                             {
-                                 day: "Saturday Workshops", 
-                                 time: "9:00 AM – 1:00 PM", 
-                                 desc: "Leadership seminars, health & hygiene education, sports, and guest mentorship series." 
-                                },
+                                day: "Weekday Evenings",
+                                time: "6:00 PM – 8:00 PM",
+                                desc: "Traditional dance rehearsals, drum circles, storytelling, and cultural performance development."
+                            },
+
+                            {
+                                day: "Saturday Workshops",
+                                time: "9:00 AM – 1:00 PM",
+                                desc: "Leadership seminars, health & hygiene education, sports, and guest mentorship series."
+                            },
 
                         ].map((sched, i) => (
                             <div key={i} className="reveal-text bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-2xs flex flex-col gap-2.5">

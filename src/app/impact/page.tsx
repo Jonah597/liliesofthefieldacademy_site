@@ -39,16 +39,16 @@ const metrics = [
 
 const testimonials = [
     {
-        name: "Abena, 11",
-        role: "Primary 5 Student",
+        name: "Comfort, 18",
+        role: "Dancer, Fashion Designer",
         quote: "Before coming to Lilies, I couldn't read English well. Now I help my younger brother with his homework and I dream of becoming a teacher.",
-        image: "/images/pic9.jpeg"
+        image: "/images/Konny.jpeg"
     },
     {
-        name: "Emmanuel, 13",
-        role: "Lead Drummer & Student",
+        name: "Bright Adeti, 20",
+        role: "Student(University Of Ghana)",
         quote: "The dance and music program taught me focus. My grades went from average to the top of my class because of the discipline I learned here.",
-        image: "/images/pic7.jpeg"
+        image: "/images/adeti.jpeg"
     }
 ];
 
