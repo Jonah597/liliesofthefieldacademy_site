@@ -86,7 +86,7 @@ export default function Impact() {
             <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
-                    <Image src="/images/impact2.jpeg" alt="Students learning together at the academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                    <Image src="/images/black-quare.jpeg" alt="Students celebrating together at an outdoor event" fill className="object-cover opacity-75 md:opacity-85" priority />
                 </div>
                 <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
                     <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
