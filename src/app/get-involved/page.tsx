@@ -101,7 +101,7 @@ export default function GetInvolved() {
             <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
-                    <Image src="/images/involved.jpeg" alt="Students and mentors at the academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                    <Image src="/images/web12.jpeg" alt="A volunteer joins students for a music and dance activity" fill className="object-cover opacity-75 md:opacity-85" priority />
                 </div>
                 <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
                     <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
@@ -181,8 +181,8 @@ export default function GetInvolved() {
                         <p className="text-base md:text-lg text-slate-600 font-normal leading-relaxed mb-6">
                             We welcome passionate educators, artists, mentors, and administrators. From teaching foundational literacy to leading arts workshops, your time makes a lasting impact. You can also support health, wellness, child development, and career guidance as new community programming takes shape.
                         </p>
-                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xs border border-slate-100">
-                            <Image src="/images/pic8.jpeg" alt="Volunteers and students" fill className="object-cover" />
+                        <div className="relative h-80 sm:h-96 lg:h-[420px] rounded-2xl overflow-hidden shadow-xs border border-slate-100">
+                            <Image src="/images/circles.jpeg" alt="Students and volunteers taking part in a group activity" fill className="object-cover" />
                         </div>
                     </div>
 
