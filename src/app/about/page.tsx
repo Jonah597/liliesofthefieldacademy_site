@@ -1,28 +1,3 @@
-/**
- * FILE: app/about/page.tsx
- *
- * PURPOSE:
- * Describes the mission, founding story, leadership, and future vision of
- * Lilies of the Field Academy. This page gives visitors the context behind the
- * programs and fundraising work shown elsewhere on the site.
- *
- * RESPONSIBILITIES:
- * - Introduces the founders and the local community context in Osu, Ghana
- * - Explains the academy's core pledge and current program impact
- * - Highlights the planned capital initiative for a permanent school facility
- * - Profiles institutional leadership and board members
- * - Opens a modal with a longer biography when a board member is selected
- * - Uses GSAP scroll-based reveal animations to create a polished narrative flow
- *
- * USED BY:
- * Next.js route: /about
- *
- * DEPENDENCIES:
- * - @/lib/impact-data for the published impact numbers displayed on the page
- * - GSAP + ScrollTrigger for reveal animations on scroll
- * - framer-motion for the board member detail modal
- */
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -35,6 +10,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { impactData } from "@/lib/impact-data";
 
 gsap.registerPlugin(ScrollTrigger);
+
+type Profile = {
+    name: string;
+    role: string;
+    desc: string;
+    img: string;
+    preview?: string;
+};
 
 const boardMembers = [
     {
@@ -49,8 +32,7 @@ Zach first met Kim Wiggin while attending Suffield Academy in 2012 and was one o
 Zach initially supported the organization by sponsoring students at the Lilies of the Field Academy. Eager to become more involved, he welcomed the opportunity to join the Board in 2022 and continue supporting the organization's mission.
 
 An avid traveler, Zach has visited more than 30 countries and has lived and worked abroad in Barcelona, Spain, and Singapore. He currently lives in Alexandria, Virginia, with his fiancée, Rebecca, and their dog, Penny.`,
-        img: "/images/zach.png",
-        imagePosition: "50% 12%"
+        img: "/images/zach.png"
     },
     {
         name: "Mariana",
@@ -86,7 +68,7 @@ Oyikwan is passionate about family, building the next generation of African comp
         name: "Fiona Bryan",
         role: "Board Member",
         desc: `Fiona Bryan is dedicated to advancing child wellness, nutrition, and community health initiatives. Her leadership helps ensure that students are supported not only academically, but also physically, emotionally, and holistically as they grow and thrive within the academy community.`,
-        img: "/images/pic5.jpeg"
+        img: "/images/fiona.jpeg"
     },
     {
         name: "Donna Phillips",
@@ -96,8 +78,57 @@ Oyikwan is passionate about family, building the next generation of African comp
 She participated in developing national and state legislation for education and directed adult and family literacy programs serving 8,000 students in Rochester, New York. Donna was also a national presenter on topics of literacy and school-to-work transitions.
 
 Today, she is retired from teaching and is an organic vegetable farmer, continuing to contribute to her community through both service and stewardship.`,
-        img: "/images/pic6.jpeg"
+        img: "/images/donna.jpeg"
     },
+];
+
+const leadershipMembers: Profile[] = [
+    {
+        name: "Kim Wiggin",
+        role: "Co-Founder & Director",
+        preview: "Kim Wiggin is a graduate of the Hartt School of Music with a Bachelor of Arts in voice and music education. She received a Masters of Arts in Special Education from the University of St. Joseph in West Hartford, Connecticut. She taught special education in public and private schools in Connecticut for over 35 years.",
+        desc: `Kim Wiggin is a graduate of the Hartt School of Music with a Bachelor of Arts in voice and music
+education, and received a Masters of Arts in Special Education from the University of St. Joseph
+in West Hartford, Connecticut. She taught special education in both public and private schools
+in Connecticut for over 35 years. Her last position was the Director of Academic Support at
+Suffield Academy in Suffield, Connecticut, where she holds the Kim Wiggin Chair in Academic
+Support, and managed the individualized academic programs for over 60 students. At Suffield,
+she also helped vocal coach the annual musical, and is responsible for the international travel
+and service programs to Europe, South America, Asia, and Africa. She returned to New England
+Music Camp in Sidney, Maine in 1995 as the head counselor, then Director until her retirement
+in 2024.
+
+Kim has been very involved in community service work at both the local level through the
+Episcopal church and local schools, and internationally. She is the founder and president of The
+Lilies Foundation, a non-profit charity that supports educational and cultural programs for
+impoverished children in the Accra region of Ghana in western Africa. The foundation supports
+Lilies of the Field Academy in Osu, and has helped over 130 Ghanaian children attend school
+through sponsorships. They proudly now count 42 high school graduates and 6 current
+university attendees among their students!
+
+Kim and her husband John live on the campus of the music camp, part of Snow Pond Center for
+the Arts in Maine. Kim also has a house in Pram Pram, Ghana, where she resides for about
+five months each year. We have 3 adult sons: Paul, and his wife Trish who also reside in Malne,
+Andrew and his wife Melanie, and their four sons Eddy, Mac, Jimmy and Mikey who live in
+Colorado, and Matthew and his husband Stephen, who live across the road from us in Maine,
+and are the current executive directors of Snow Pond Center for the Arts. It is a blessed and
+joyous life!`,
+        img: "/images/pic10.jpeg"
+    },
+    {
+        name: "Joe Oko Adokwei",
+        role: "Co-Founder & Executive Director",
+        preview: "Joseph Oko Adokwei is an Osu native, educator, and choreographer. He co-founded Lilies of the Field Academy with Kim Wiggin in January 2016. Through cultural arts and community programs, he supports youth empowerment and the academy's work with local children.",
+        desc: `Joseph Oko Adokwei is an Osu native, educator, and choreographer. He co-founded Lilies of the Field Academy with Kim Wiggin in January 2016. As Executive Director, he helps lead the academy's work in the community. His commitment to youth empowerment is reflected in the cultural arts and community programs he supports.`,
+        img: "/images/lilies_img2.jpg"
+    },
+    {
+        name: "Luigia Adjei",
+        role: "Head Teacher",
+        preview: "Luigia Adjei leads daily curriculum delivery across the academy's primary grade levels. She oversees literacy assessments to help track and support students' learning. She also coordinates teachers and classroom instruction across the school.",
+        desc: `Luigia Adjei serves as Head Teacher at Lilies of the Field Academy. She oversees daily curriculum delivery and literacy assessments across all primary grade levels. She also coordinates teachers and classroom instruction across the school. Through this work, she supports students' learning and the academy's day-to-day educational program.`,
+        img: "/images/lilies_img1.jpg"
+    }
 ];
 
 export default function About() {
@@ -105,7 +136,7 @@ export default function About() {
     const modalRef = useRef<HTMLDivElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    const [selectedMember, setSelectedMember] = useState<(typeof boardMembers)[number] | null>(null);
+    const [selectedMember, setSelectedMember] = useState<Profile | null>(null);
 
     const closeBio = () => {
         setSelectedMember(null);
@@ -206,7 +237,6 @@ export default function About() {
                     </p>
                 </div>
 
-
             </section>
 
             {/* 2. VISION & MISSION - FOUNDERS SECTION */}
@@ -284,34 +314,41 @@ export default function About() {
                     <p className="text-base sm:text-lg text-slate-600 font-normal max-w-xl mx-auto">The educators, community leaders, and directors guiding our daily operations.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                    {[
-                        {
-                            name: "Kim Wiggin",
-                            role: "Co-Founder & Director",
-                            desc: "A veteran educator with over 35 years in teaching and school administration across the United States and Ghana.",
-                            img: "/images/pic10.jpeg"
-                        },
-                        {
-                            name: "Joe Oko Adokwei",
-                            role: "Co-Founder & Executive Director",
-                            desc: "An Osu native, educator, and choreographer dedicated to youth empowerment through cultural arts and community programs.",
-                            img: "/images/lilies_img2.jpg"
-                        },
-                        {
-                            name: "Luigia Adjei",
-                            role: "Head Teacher",
-                            desc: "Oversees daily curriculum delivery, literacy assessments, and teacher coordination across all primary grade levels.",
-                            img: "/images/lilies_img1.jpg"
-                        }
-                    ].map((member, i) => (
-                        <div key={i} className="reveal-text flex flex-col items-center text-center p-8 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all duration-300">
-                            <div className="relative w-32 h-32 mb-5 rounded-full overflow-hidden border-2 border-white shadow-xs">
-                                <Image src={member.img} alt={member.name} fill className="object-cover" />
-                            </div>
-                            <h3 className="text-xl font-heading font-bold text-slate-900 mb-1">{member.name}</h3>
-                            <p className="text-[#2563eb] font-semibold uppercase tracking-[0.14em] text-xs mb-3">{member.role}</p>
-                            <p className="text-sm text-slate-600 leading-relaxed font-normal">{member.desc}</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+                    {leadershipMembers.map((member) => (
+                        <div
+                            key={member.name}
+                            className="reveal-text group flex flex-col items-center rounded-2xl border border-slate-100 bg-slate-50 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-md"
+                        >
+                            <button
+                                type="button"
+                                onClick={(event) => {
+                                    triggerRef.current = event.currentTarget;
+                                    setSelectedMember(member);
+                                }}
+                                className="flex w-full flex-col items-center focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+                                aria-label={`View bio for ${member.name}`}
+                            >
+                                <div className="relative mb-3.5 h-20 w-20 overflow-hidden rounded-full border border-white shadow-2xs transition-transform duration-500 group-hover:scale-105">
+                                    <Image
+                                        src={member.img}
+                                        alt={member.name}
+                                        width={80}
+                                        height={80}
+                                        sizes="80px"
+                                        className="h-20 w-20 object-cover"
+                                    />
+                                </div>
+                                <h3 className="mb-0.5 text-base font-heading font-bold text-slate-900">{member.name}</h3>
+                                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{member.role}</p>
+                                <p className="mb-3 text-sm leading-relaxed text-slate-600">{member.preview}....... </p>
+                                <span className="inline-flex items-center gap-2 rounded-full px-2 py-1 text-xs font-semibold text-slate-700 transition-colors group-hover:text-[#2563eb]">
+                                    View full bio
+                                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-[#2563eb] transition-all duration-200 group-hover:translate-x-0.5 group-hover:bg-[#2563eb] group-hover:text-white" aria-hidden="true">
+                                        <span className="text-lg font-medium leading-none">&gt;</span>
+                                    </span>
+                                </span>
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -342,12 +379,17 @@ export default function About() {
                                             height={80}
                                             sizes="80px"
                                             className="h-20 w-20 object-cover"
-                                            style={boardMember.imagePosition ? { objectPosition: boardMember.imagePosition } : undefined}
+                                            style={boardMember.name === "Zach McCormic" ? { objectPosition: "center 14%" } : undefined}
                                         />
                                     </div>
                                     <h4 className="mb-0.5 text-base font-heading font-bold text-slate-900">{boardMember.name}</h4>
                                     <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{boardMember.role}</p>
-                                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 transition-colors group-hover:text-[#2563eb]">View bio <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+                                    <span className="inline-flex items-center gap-2 rounded-full px-2 py-1 text-xs font-semibold text-slate-700 transition-colors group-hover:text-[#2563eb]">
+                                        View bio
+                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-[#2563eb] transition-all duration-200 group-hover:translate-x-0.5 group-hover:bg-[#2563eb] group-hover:text-white" aria-hidden="true">
+                                            <span className="text-lg font-medium leading-none">&gt;</span>
+                                        </span>
+                                    </span>
                                 </button>
                             </div>
                         ))}
@@ -370,7 +412,7 @@ export default function About() {
                             ref={modalRef}
                             role="dialog"
                             aria-modal="true"
-                            aria-labelledby="board-member-name"
+                            aria-labelledby="member-name"
                             tabIndex={-1}
                             className="relative mx-auto mt-0 max-h-[calc(100vh-1rem)] min-h-[50vh] w-full max-w-4xl overscroll-contain overflow-y-auto overflow-x-hidden rounded-3xl bg-white shadow-2xl sm:mt-0 sm:max-h-[calc(100vh-2rem)] md:mt-0 md:max-h-[calc(100vh-3rem)]"
                             initial={{ opacity: 0, scale: 0.88, y: 40, rotateX: 8 }}
@@ -386,7 +428,7 @@ export default function About() {
                                 ref={closeButtonRef}
                                 onClick={closeBio}
                                 className="absolute right-4 top-4 z-20 rounded-full bg-white/90 p-2.5 text-slate-600 shadow-md transition-colors hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-[#2563eb]"
-                                aria-label="Close board member bio"
+                                aria-label="Close biography"
                             >
                                 <X className="h-5 w-5" />
                             </button>
@@ -397,14 +439,7 @@ export default function About() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
                                 >
-                                    <Image
-                                        src={selectedMember.img}
-                                        alt={selectedMember.name}
-                                        fill
-                                        className="object-cover"
-                                        style={selectedMember.imagePosition ? { objectPosition: selectedMember.imagePosition } : { objectPosition: "center" }}
-                                        priority
-                                    />
+                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover object-center" priority />
                                 </motion.div>
                                 <motion.div
                                     className="flex max-w-2xl flex-col"
@@ -415,7 +450,7 @@ export default function About() {
                                     <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{selectedMember.role}</p>
                                     <div className="mb-4 inline-flex w-fit flex-col items-start">
                                         <h2
-                                            id="board-member-name"
+                                            id="member-name"
                                             className="text-3xl font-heading font-bold tracking-tight text-slate-900 sm:text-4xl"
                                         >
                                             {selectedMember.name}
