@@ -133,7 +133,7 @@ export default function Donate() {
             <section className="relative flex min-h-[50svh] w-full items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 px-6 pb-20 pt-28 md:pt-36">
                 <div className="absolute inset-0 select-none">
                     <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
-                    <Image src="/images/edited1.png" alt="Children supported by Lilies of the Field Academy" fill className="object-cover opacity-75 md:opacity-85" priority />
+                    <Image src="/images/edited1.png" alt="Children supported by Lilies of the Field Academy" fill className="object-cover opacity-75 md:opacity-85" unoptimized priority />
                 </div>
                 <div className="container relative z-20 mx-auto max-w-4xl text-center text-white">
                     <span className="reveal-text eyebrow mb-4 block text-white">Donate</span>
@@ -150,7 +150,7 @@ export default function Donate() {
                     <p className="mt-5 text-base leading-relaxed text-slate-600">Your support helps Lilies of the Field Academy continue showing up for children and families through the everyday work of education, care, and community.</p>
                 </div>
                 <div className="reveal-text relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
-                    <Image src="/images/edited1.png" alt="Students learning together at Lilies of the Field Academy" fill className="object-cover" />
+                    <Image src="/images/edited1.png" alt="Students learning together at Lilies of the Field Academy" fill className="object-cover" unoptimized />
                 </div>
             </section>
 

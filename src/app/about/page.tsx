@@ -404,7 +404,7 @@ export default function About() {
             <AnimatePresence>
                 {selectedMember && (
                     <motion.div
-                        className="fixed inset-0 z-[120] flex items-start justify-start overflow-hidden bg-slate-950/70 p-4 pt-2 backdrop-blur-md sm:p-8 sm:pt-4 md:p-12 md:pt-6"
+                        className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-slate-950/70 p-3 backdrop-blur-md sm:p-8 md:p-12"
                         role="presentation"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -418,7 +418,7 @@ export default function About() {
                             aria-modal="true"
                             aria-labelledby="member-name"
                             tabIndex={-1}
-                            className="relative mx-auto mt-0 max-h-[calc(100vh-1rem)] min-h-[50vh] w-full max-w-4xl overscroll-contain overflow-y-auto overflow-x-hidden rounded-3xl bg-white shadow-2xl sm:mt-0 sm:max-h-[calc(100vh-2rem)] md:mt-0 md:max-h-[calc(100vh-3rem)]"
+                            className="relative mx-auto my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-4xl overscroll-contain overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl sm:max-h-[calc(100dvh-4rem)] sm:rounded-3xl"
                             initial={{ opacity: 0, scale: 0.88, y: 40, rotateX: 8 }}
                             animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
                             exit={{ opacity: 0, scale: 0.94, y: 24 }}
@@ -436,9 +436,9 @@ export default function About() {
                             >
                                 <X className="h-5 w-5" />
                             </button>
-                            <div className="flex min-h-[50vh] flex-col p-8 text-left sm:p-10 md:p-14">
+                            <div className="flex flex-col p-5 pt-14 text-left sm:p-10 md:p-14">
                                 <motion.div
-                                    className="relative mb-8 h-[340px] w-full max-w-[240px] shrink-0 overflow-hidden rounded-2xl bg-slate-200 shadow-lg ring-4 ring-white sm:h-[400px] sm:max-w-[270px] md:h-[440px] md:max-w-[280px]"
+                                    className="relative mx-auto mb-5 h-36 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-200 shadow-lg ring-4 ring-white sm:mx-0 sm:mb-8 sm:h-[400px] sm:w-full sm:max-w-[270px] md:h-[440px] md:max-w-[280px]"
                                     initial={{ opacity: 0, x: -35 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
@@ -451,22 +451,23 @@ export default function About() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.2, duration: 0.55, ease: "easeOut" }}
                                 >
-                                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#2563eb]">{selectedMember.role}</p>
-                                    <div className="mb-4 inline-flex w-fit flex-col items-start">
+                                    <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-[#2563eb] sm:text-left sm:text-xs sm:tracking-[0.14em]">{selectedMember.role}</p>
+                                    <div className="mb-4 inline-flex w-fit flex-col items-center sm:items-start">
                                         <h2
                                             id="member-name"
-                                            className="text-3xl font-heading font-bold tracking-tight text-slate-900 sm:text-4xl"
+                                            className="text-center text-2xl font-heading font-bold tracking-tight text-slate-900 sm:text-left sm:text-4xl"
                                         >
                                             {selectedMember.name}
                                         </h2>
                                         <span className="mt-2 h-1.5 w-full rounded-full bg-gradient-to-r from-[#2563eb] via-[#60a5fa] to-[#bfdbfe] shadow-[0_0_18px_rgba(37,99,235,0.25)]" />
                                     </div>
-                                    <p
-                                        className="max-w-3xl whitespace-pre-line text-center text-base leading-8 text-slate-600 md:text-justify"
-                                        style={{ textAlign: "justify" }}
-                                    >
-                                        {selectedMember.desc}
-                                    </p>
+                                    <div className="max-w-3xl space-y-3 text-left text-sm leading-6 text-slate-600 sm:text-base sm:leading-8 md:text-justify">
+                                        {selectedMember.desc.split(/\n\s*\n/).map((paragraph, index) => (
+                                            <p key={`${selectedMember.name}-${index}`} className="whitespace-normal sm:whitespace-pre-line">
+                                                {paragraph.trim()}
+                                            </p>
+                                        ))}
+                                    </div>
                                 </motion.div>
                             </div>
                         </motion.div>

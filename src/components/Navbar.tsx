@@ -105,15 +105,17 @@ export default function Navbar() {
           : "bg-transparent py-4 md:py-5"
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl flex items-center justify-between">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
         {/* Academy logo — clicking it navigates to the home page */}
-        <Link href="/" className="flex items-center group relative z-[110] shrink-0">
+        <Link href="/" className="order-2 flex items-center group relative z-[110] shrink-0 lg:order-1">
           <div
             className={cn(
               // Logo container: white background with rounded corners
               // Shrinks slightly when the navbar enters its scrolled compact state
               "relative transition-all duration-300 rounded-xl p-1 bg-white shadow-xs border border-slate-100/90 flex items-center justify-center",
-              scrolled ? "h-20 w-20 md:h-24 md:w-24" : "h-28 w-28 md:h-32 md:w-32"
+              scrolled
+                ? "h-14 w-14 sm:h-16 sm:w-16 lg:h-24 lg:w-24"
+                : "h-16 w-16 sm:h-20 sm:w-20 lg:h-32 lg:w-32"
             )}
           >
             <Image
@@ -121,7 +123,7 @@ export default function Navbar() {
               alt="Lilies Foundation Logo"
               fill
               // Responsive size hints so the browser loads the right image size
-              sizes="(max-width: 768px) 80px, 96px"
+              sizes="(max-width: 640px) 64px, (max-width: 1024px) 80px, 128px"
               className="object-contain p-[4%]"
               // priority: this image is above the fold and should load immediately
               priority
@@ -171,7 +173,7 @@ export default function Navbar() {
 
         {/* ─── Mobile Hamburger Button (visible only on screens smaller than lg) ─── */}
         <button
-          className="lg:hidden flex flex-col justify-center items-center w-10 h-10 z-[110] gap-[4.5px] bg-white rounded-xl shadow-xs border border-slate-200/70 transition-colors active:translate-y-0.5"
+          className="order-1 lg:order-none lg:hidden flex flex-col justify-center items-center w-10 h-10 z-[110] gap-[4.5px] bg-white rounded-xl shadow-xs border border-slate-200/70 transition-colors active:translate-y-0.5"
           onClick={() => setMobileMenuOpen((open) => !open)}
           // Accessible label for screen readers and keyboard users
           aria-label="Toggle navigation menu"

@@ -134,6 +134,7 @@ export default function Home() {
             alt="Children studying at Lilies of the Field Academy"
             fill
             className="object-cover opacity-75 md:opacity-85"
+            unoptimized
             priority
           />
         </div>
@@ -213,6 +214,7 @@ export default function Home() {
               alt="Students in classroom"
               fill
               className="object-cover"
+              unoptimized
             />
           </div>
         </div>

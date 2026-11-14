@@ -120,6 +120,7 @@ export default function Stories() {
                                         alt={story.title}
                                         fill
                                         className="object-cover"
+                                        unoptimized={story.image === "/images/pic9.jpeg"}
                                     />
                                 </div>
                                 <div className="p-6 md:p-8">

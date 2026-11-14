@@ -125,6 +125,7 @@ export default function Gallery() {
                                 alt={img.title}
                                 fill
                                 className="object-cover"
+                                unoptimized={img.src === "/images/edited1.png" || img.src === "/images/pic9.jpeg"}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-250 flex flex-col justify-end p-6">
                                 <span className="text-blue-300 text-xs font-semibold uppercase tracking-[0.14em] mb-1">{img.category}</span>
