@@ -17,6 +17,7 @@ type Profile = {
     desc: string;
     img: string;
     preview?: string;
+    imagePosition?: string;
 };
 
 const boardMembers = [
@@ -113,7 +114,8 @@ Andrew and his wife Melanie, and their four sons Eddy, Mac, Jimmy and Mikey who 
 Colorado, and Matthew and his husband Stephen, who live across the road from us in Maine,
 and are the current executive directors of Snow Pond Center for the Arts. It is a blessed and
 joyous life!`,
-        img: "/images/pic10.jpeg"
+        img: "/images/kim.jpg",
+        imagePosition: "center 35%"
     },
     {
         name: "Joe Oko Adokwei",
@@ -213,7 +215,7 @@ export default function About() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-20">
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
                     <Image
@@ -337,6 +339,7 @@ export default function About() {
                                         height={80}
                                         sizes="80px"
                                         className="h-20 w-20 object-cover"
+                                        style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
                                     />
                                 </div>
                                 <h3 className="mb-0.5 text-base font-heading font-bold text-slate-900">{member.name}</h3>
@@ -439,7 +442,7 @@ export default function About() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.12, duration: 0.55, ease: "easeOut" }}
                                 >
-                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover object-center" priority />
+                                    <Image src={selectedMember.img} alt={selectedMember.name} fill className="object-cover object-center" style={selectedMember.imagePosition ? { objectPosition: selectedMember.imagePosition } : undefined} priority />
                                 </motion.div>
                                 <motion.div
                                     className="flex max-w-2xl flex-col"

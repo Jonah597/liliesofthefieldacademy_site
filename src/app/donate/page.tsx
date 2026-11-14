@@ -130,9 +130,9 @@ export default function Donate() {
 
     return (
         <div ref={containerRef} className="flex min-h-screen w-full flex-col overflow-hidden bg-white">
-            <section className="relative flex min-h-[48svh] w-full items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 px-6 pb-16 pt-28 md:pt-36">
+            <section className="relative flex min-h-[50svh] w-full items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 px-6 pb-20 pt-28 md:pt-36">
                 <div className="absolute inset-0 select-none">
-                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/35 via-sky-500/20 to-indigo-900/55" />
+                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
                     <Image src="/images/edited1.png" alt="Children supported by Lilies of the Field Academy" fill className="object-cover opacity-75 md:opacity-85" priority />
                 </div>
                 <div className="container relative z-20 mx-auto max-w-4xl text-center text-white">

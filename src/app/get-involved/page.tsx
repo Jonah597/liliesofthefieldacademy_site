@@ -98,10 +98,10 @@ export default function GetInvolved() {
     return (
         <div className="w-full flex-col flex overflow-hidden bg-white min-h-screen" ref={containerRef}>
             {/* 1. HERO */}
-            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-16">
+            <section className="relative min-h-[50svh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-700 via-blue-800 to-indigo-950 pt-28 md:pt-36 pb-20">
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-600/40 via-sky-500/20 to-indigo-900/50" />
-                    <Image src="/images/web12.jpeg" alt="A volunteer joins students for a music and dance activity" fill className="object-cover opacity-75 md:opacity-85" priority />
+                    <Image src="/images/invo2.jpg" alt="A volunteer joins students for a music and dance activity" fill className="object-cover object-[50%_35%]" priority />
                 </div>
                 <div className="container relative z-20 mx-auto px-6 max-w-4xl text-center text-white">
                     <span className="reveal-text uppercase text-white font-semibold tracking-[0.14em] text-xs mb-3.5 block bg-blue-950/35 py-1.5 px-4 rounded-full w-fit mx-auto shadow-2xs">
