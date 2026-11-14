@@ -122,7 +122,8 @@ joyous life!`,
         role: "Co-Founder & Executive Director",
         preview: "Joseph Oko Adokwei is an Osu native, educator, and choreographer. He co-founded Lilies of the Field Academy with Kim Wiggin in January 2016. Through cultural arts and community programs, he supports youth empowerment and the academy's work with local children.",
         desc: `Joseph Oko Adokwei is an Osu native, educator, and choreographer. He co-founded Lilies of the Field Academy with Kim Wiggin in January 2016. As Executive Director, he helps lead the academy's work in the community. His commitment to youth empowerment is reflected in the cultural arts and community programs he supports.`,
-        img: "/images/lilies_img2.jpg"
+        img: "/images/oko.jpg",
+        imagePosition: "center 10%"
     },
     {
         name: "Luigia Adjei",
