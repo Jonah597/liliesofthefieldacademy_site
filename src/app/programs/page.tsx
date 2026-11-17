@@ -45,7 +45,7 @@ const programs = [
         title: "Cultural Dance & Music",
         desc: "Traditional Ghanaian dance, drumming, and performing arts. Arts education builds profound self-esteem, discipline, and cultural identity in young minds.",
         features: ["Traditional drumming workshops", "Choreography & performance", "Vocal training & rhythm", "International cultural exchange"],
-        image: "/images/pic7.jpeg",
+        image: "/images/comfortdance2.jpeg",
         stats: "Weekly Rehearsals"
     },
     {
