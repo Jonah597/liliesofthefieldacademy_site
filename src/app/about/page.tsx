@@ -130,7 +130,7 @@ joyous life!`,
         role: "Head Teacher",
         preview: "Luigia Adjei leads daily curriculum delivery across the academy's primary grade levels. She oversees literacy assessments to help track and support students' learning. She also coordinates teachers and classroom instruction across the school.",
         desc: `Luigia Adjei serves as Head Teacher at Lilies of the Field Academy. She oversees daily curriculum delivery and literacy assessments across all primary grade levels. She also coordinates teachers and classroom instruction across the school. Through this work, she supports students' learning and the academy's day-to-day educational program.`,
-        img: "/images/lilies_img1.jpg"
+        img: "/images/lugia.jpg"
     }
 ];
 
