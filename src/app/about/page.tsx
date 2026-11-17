@@ -264,7 +264,7 @@ export default function About() {
                             rel="noopener noreferrer"
                             className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 active:translate-y-0.5"
                         >
-                            This the story of our begining
+                            This is the story of our beginning
                             <ArrowRight className="h-4 w-4" />
                         </Link>
                     </div>
