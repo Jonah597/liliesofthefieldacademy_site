@@ -36,10 +36,10 @@ An avid traveler, Zach has visited more than 30 countries and has lived and work
         img: "/images/zach.png"
     },
     {
-        name: "Mariana",
+        name: "Mariama Perry",
         role: "Board Member",
-        desc: `Mariana is a valued member of the board whose support reflects a deep commitment to mentoring, community care, and educational opportunity. Her involvement continues to strengthen the academy's mission by bringing thoughtful leadership and a generous spirit to the work of serving students and families.`,
-        img: "/images/pic2.jpeg"
+        desc: `Mariama is a valued member of the board whose support reflects a deep commitment to mentoring, community care, and educational opportunity. Her involvement continues to strengthen the academy's mission by bringing thoughtful leadership and a generous spirit to the work of serving students and families.`,
+        img: "/images/Mariama.JPG"
     },
     {
         name: "Marian Murphy Powell",

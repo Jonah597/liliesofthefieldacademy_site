@@ -23,6 +23,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -186,6 +187,18 @@ export default function Contact() {
                                 >
                                     <Send className="w-4 h-4" /> Send Inquiry
                                 </button>
+
+                                <p className="text-xs text-slate-500 text-center leading-relaxed mt-1">
+                                    By submitting this inquiry, you agree to our{" "}
+                                    <Link href="/privacy" className="text-slate-700 underline underline-offset-2 hover:text-[#2563eb]">
+                                        Privacy Policy
+                                    </Link>{" "}
+                                    and{" "}
+                                    <Link href="/terms" className="text-slate-700 underline underline-offset-2 hover:text-[#2563eb]">
+                                        Terms &amp; Conditions
+                                    </Link>
+                                    . We respect your privacy and never share your details.
+                                </p>
                             </form>
                         ) : (
                             <div className="flex flex-col items-center text-center py-14">

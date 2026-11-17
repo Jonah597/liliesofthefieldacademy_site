@@ -70,7 +70,7 @@ export default function Footer() {
                                     alt="Lilies Foundation Logo"
                                     fill
                                     sizes="96px"
-                                    className="object-contain p-[5%]"
+                                    className="object-contain scale-125"
                                 />
                             </div>
                         </Link>
@@ -165,7 +165,8 @@ export default function Footer() {
                     </p>
                     <div className="flex items-center gap-5 text-white/60 text-xs font-normal">
                         <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                        <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
+                        <Link href="/terms#donations-and-refunds" className="hover:text-white transition-colors">Refund Policy</Link>
                         {/* Location badge — purely decorative/informational */}
                         <span className="text-white/70 bg-white/10 px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/15">
                             Osu, Accra
