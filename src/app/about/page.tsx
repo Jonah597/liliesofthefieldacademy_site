@@ -258,6 +258,15 @@ export default function About() {
                         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
                             Together, they recognized that talented children in Osu were missing foundational schooling due to family financial hardship. Lilies of the Field Academy was established to eliminate barriers to learning and nourish full human potential.
                         </p>
+                        <Link
+                            href="https://www.youtube.com/watch?v=IOFN7ze_mzA"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 active:translate-y-0.5"
+                        >
+                            This the story of our begining
+                            <ArrowRight className="h-4 w-4" />
+                        </Link>
                     </div>
                     <div className="reveal-text relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-sm border border-slate-100">
                         <Image src="/images/pic10.jpeg" alt="Joseph Oko Adokwei and Kim Wiggin" fill className="object-cover" />
